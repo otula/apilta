@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="css/demo1.css">
+		<title>Apilta Shock Demo 1</title>
+	    <script src="js/lib/jquery-3.3.1.min.js"></script>
+    	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry&key=GOOGLE_MAPS_API_KEY"></script>
+			<script src="js/utils.js"></script>
+    	<script src="js/demo1.js"></script>
+	</head>
+	<body onload="demo1.initialize()">
+		<div class="tools">
+			<div class="tools-limits">
+				Min index:<input type="number" value="0" id="minLimit"/><br>
+			  Max index:<input type="number" value="100" id="maxLimit"/><br>
+				User ids:<input type="text" placeholder="userId,userId,..." id="userIds"/><br>
+				Levels:<input type="text" placeholder="level,level,..." id="levels"/>
+			</div>
+			<div class="tools-markers">
+				<input onclick="demo1.toggleMarkers(0)" src="icons/green.png" alt="L0" type="image"/>
+				<input onclick="demo1.toggleMarkers(1)" src="icons/yellow.png" alt="L1" type="image"/>
+				<input onclick="demo1.toggleMarkers(2)" src="icons/orange.png" alt="L2" type="image"/>
+				<input onclick="demo1.toggleMarkers(3)" src="icons/red.png" alt="L3" type="image"/>
+				<input onclick="demo1.toggleMarkers(4)" src="icons/black.png" alt="L4" type="image"/><br>
+				LowerLeft:<div id="lowerLeft"><!-- populated dynamically --></div>
+				UpperRight:<div id="upperRight"><!-- populated dynamically --></div>
+				<input onclick="demo1.retrieveMeasurements()" type="button" value="Retrieve"/>
+			</div>
+			<div class="tools-groups">
+				Max group range (m):<input type="number" value="100" id="groupRange"/><br>
+			  Min measurements:<input type="number" id="groupMinMeasurements" value="3"/><br>
+				Shock levels:<input type="text" id="groupShockLevel" value="2,3,4"/><br>
+				<input onclick="demo1.calculateGroups()" type="button" value="Calculate Groups"/>
+			</div>
+		</div>
+		<div id="map-canvas"><!-- map overlay --></div>
+		<div id="wait-dialog" class="hidden"><!-- populated dynamically --></div>
+	</body>
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <style name="text_large" parent="@android:style/TextAppearance.Large">
+        <item name="android:textSize">38sp</item>
+    </style>
+    
+    <style name="text_medium" parent="@android:style/TextAppearance.Large">
+    </style>
+    
+    <style name="text_input" parent="@style/text_large">
+        <item name="android:typeface">monospace</item>
+    </style>
+    
+    <style name="text_small" parent="@android:style/TextAppearance.Small">
+    </style>
+    
+    <style name="horizontal_divider">
+	    <item name="android:layout_width">match_parent</item>
+	    <item name="android:layout_height">1dp</item>
+	    <item name="android:background">?android:attr/listDivider</item>
+	    <item name="android:paddingTop">6dp</item>
+	    <item name="android:paddingBottom">6dp</item>
+	</style>
+</resources>

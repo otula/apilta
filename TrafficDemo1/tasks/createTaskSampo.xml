@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<task>
+	<description>An example task that can be used to test the createTask method. The task is for gathering UV_index/individual and cloud_cover/individual from SAMPO.</description>
+	<name>Traffic demo1 task for SAMPO</name>
+	<taskTypeList>
+		<taskType>gather</taskType>
+	</taskTypeList>
+	<userDetails>
+		<userId>2</userId>
+	</userDetails>
+	<backendList>
+		<backend>
+			<backendId>8</backendId>
+			<taskStatus>NOT_STARTED</taskStatus>
+		</backend>
+	</backendList>
+	<when>
+		<condition>
+			<terms>
+				<entry>
+					<key>time/validFromToRange</key>
+					<value>2017-07-04T10:15:31Z/2117-07-04T10:15:31Z</value>
+				</entry>
+				<entry>
+					<key>time/interval</key>
+					<value>86400</value>
+				</entry>
+			</terms>
+		</condition>
+	</when>
+	<what>
+		<output>
+			<feature>UV_index/individual</feature>
+		</output>
+		<output>
+			<feature>cloud_cover/individual</feature>
+		</output>
+	</what>
+</task>

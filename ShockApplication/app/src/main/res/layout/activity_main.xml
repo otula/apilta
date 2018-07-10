@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="tut.pori.shockapplication.MainActivity"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <Button
+        android:id="@+id/button_start"
+        android:layout_width="wrap_content"
+        android:text="@string/start"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/button_stop"
+        android:layout_width="wrap_content"
+        android:text="@string/stop"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/button_grant_permissions"
+        android:layout_width="wrap_content"
+        android:text="@string/request_permissions"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/count_total"/>
+
+    <TextView
+        android:id="@+id/count_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"/>
+
+    <Button
+        android:id="@+id/button_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/send"/>
+
+    <EditText
+        android:id="@+id/edit_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_username"/>
+
+    <EditText
+        android:id="@+id/edit_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:hint="@string/hint_password"/>
+
+    <Switch
+        android:id="@+id/switch_public_data"
+        android:layout_width="wrap_content"
+        android:text="@string/public_data"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/button_save_settings"
+        android:layout_width="wrap_content"
+        android:text="@string/save_settings"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/button_show_systematic_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/show_systematic_error"/>
+
+    <Button
+        android:id="@+id/button_print_log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/print_log"/>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/log"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </ScrollView>
+
+</LinearLayout>

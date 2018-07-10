@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<task>
+	<description>An example task that can be used to test the createTask method. The task is for gathering parking location and details from the Parking service.</description>
+	<name>Traffic demo1 task for Parking</name>
+	<taskTypeList>
+		<taskType>gather</taskType>
+	</taskTypeList>
+	<userDetails>
+		<userId>2</userId>
+	</userDetails>
+	<backendList>
+		<backend>
+			<backendId>9</backendId>
+			<taskStatus>NOT_STARTED</taskStatus>
+		</backend>
+	</backendList>
+	<when>
+		<condition>
+			<terms>
+				<entry>
+					<key>location/point</key>
+					<value>61.4927406,21.8008332</value>
+				</entry>
+			</terms>
+		</condition>
+	</when>
+	<what>
+		<output>
+			<feature>parking/location</feature>
+		</output>
+		<output>
+			<feature>parking/details</feature>
+		</output>
+	</what>
+</task>

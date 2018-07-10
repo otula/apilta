@@ -1,0 +1,33 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "tut.pori.alertapplication"
+        minSdkVersion 23
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // This is awesome https://hc.apache.org/httpcomponents-client-4.5.x/android-port.html (when targeting Android API 23 and newer)
+    // Latest version of 4.3 API is 4.3.6.1
+    // Latest version of 4.4 API is 4.4.1.2
+    // other versions and documentation can be found here: https://github.com/smarek/httpclient-android/releases
+    compile group: 'cz.msebera.android' , name: 'httpclient' , version: '4.4.1.2'
+
+    // for maps
+    compile 'com.google.android.gms:play-services:10.2.0'
+}

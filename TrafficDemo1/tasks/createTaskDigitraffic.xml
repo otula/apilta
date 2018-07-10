@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<task>
+	<description>An example task that can be used to test the createTask method. The task is for gathering TIE_1 and ILMA temperatures from the Digitraffic service.</description>
+	<name>Traffic demo1 task for Digitraffic</name>
+	<taskTypeList>
+		<taskType>gather</taskType>
+	</taskTypeList>
+	<userDetails>
+		<userId>2</userId>
+	</userDetails>
+	<backendList>
+		<backend>
+			<backendId>7</backendId>
+			<taskStatus>NOT_STARTED</taskStatus>
+		</backend>
+	</backendList>
+	<when>
+		<condition>
+			<terms>
+				<entry>
+					<key>time/interval</key>
+					<value>180</value>
+				</entry>
+				<entry>
+					<key>time/validFromToRange</key>
+					<value>2017-07-04T10:15:31Z/2117-07-04T10:15:31Z</value>
+				</entry>
+				<entry>
+					<key>location/point</key>
+					<value>61.4927406,21.8008332</value>
+				</entry>
+			</terms>
+		</condition>
+	</when>
+	<what>
+		<output>
+			<feature>weather-data/ILMA</feature>
+		</output>
+		<output>
+			<feature>weather-data/TIE_1</feature>
+		</output>
+		<output>
+			<feature>sensor/location</feature>
+		</output>
+	</what>
+</task>

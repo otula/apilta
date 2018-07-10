@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<!-- E.g. http://example.org/ShockDemo2/demo2.html?timestamp=2018-03-23T11:53:32Z/2018-03-26T11:53:32Z&location_limits=LATITUDE;LONGITUDE,LATITUDE;LONGITUDE -->
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="css/demo2.css">
+		<link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+		<title>Apilta Shock Demo 1</title>
+	    <script src="js/lib/jquery-3.3.1.min.js"></script>
+    	<script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
+			<script src="js/utils.js"></script>
+    	<script src="js/demo2.js"></script>
+	</head>
+	<body onload="demo2.initialize()">
+		<div class="tools">
+			<div id="tools-limits" class="unselectable">
+				Min index:<input type="number" value="0" id="minLimit"/><br>
+			  Max index:<input type="number" value="100" id="maxLimit"/><br>
+				User ids:<input type="text" placeholder="userId,userId,..." id="userIds"/><br>
+				Levels:<input type="text" placeholder="level,level,..." id="levels"/>
+			</div>
+			<div id="tools-markers" class="unselectable">
+				<input onclick="demo2.toggleMarkers(0)" src="icons/green.png" alt="L0" type="image"/>
+				<input onclick="demo2.toggleMarkers(1)" src="icons/yellow.png" alt="L1" type="image"/>
+				<input onclick="demo2.toggleMarkers(2)" src="icons/orange.png" alt="L2" type="image"/>
+				<input onclick="demo2.toggleMarkers(3)" src="icons/red.png" alt="L3" type="image"/>
+				<input onclick="demo2.toggleMarkers(4)" src="icons/black.png" alt="L4" type="image"/><br>
+				LowerLeft:<div id="lowerLeft"><!-- populated dynamically --></div>
+				UpperRight:<div id="upperRight"><!-- populated dynamically --></div>
+				<input onclick="demo2.retrieveMeasurements()" type="button" value="Retrieve"/>
+			</div>
+			<div id="tools-groups" class="unselectable">
+				Group range:<input type="number" placeholder="range in meters" id="groupRange" value="0"/><br>
+				Group method:<input type="text" placeholder="average or median" id="groupMethod"/>
+			</div>
+			<div id="tools-highlights" class="unselectable">
+				Max range (m):<input type="number" value="100" id="highlightRange"/><br>
+			  Min measurements:<input type="number" id="highlightMinMeasurements" value="3"/><br>
+				Shock levels:<input type="text" id="highlightShockLevel" value="2,3,4"/><br>
+				<input onclick="demo2.calculateHighlights()" type="button" value="Calculate Highlights"/>
+			</div>
+			<div id="tools-settings" class="unselectable">
+				<input onclick="demo2.toggleDiv(document.getElementById('settings-dialog'))" src="icons/settings.png" alt="Settings" type="image"/>
+			</div>
+		</div>
+		<div id="map" class="map"><!-- map overlay --></div>
+		<div id="settings-dialog" class="hidden">
+			<div id="settings-toggles">
+				<!-- TODO change span toggles to actual checkboxes, save settings to localstorage -->
+				<span onclick="demo2.toggleDiv(document.getElementById('tools-limits'))">Show limits</span><br>
+				<span onclick="demo2.toggleDiv(document.getElementById('tools-markers'))">Show markers</span><br>
+				<span onclick="demo2.toggleDiv(document.getElementById('tools-groups'))">Show groups</span><br>
+				<span onclick="demo2.toggleDiv(document.getElementById('tools-highlights'))">Show highlights</span>
+			</div>
+			<!-- TODO username and password -->
+		</div>
+		<div id="status-bar"><!-- populated dynamically --></div>
+		<div id="wait-dialog" class="hidden unselectable"><!-- populated dynamically --></div>
+	</body>
+</html>

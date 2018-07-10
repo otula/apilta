@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="fi.tut.pori.otula.roadroamer">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+    <uses-feature android:name="android.hardware.location.gps"/>
+
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <!--
+         android.hardware.camera class was deprecated in API level 21.
+        use android.hardware.camera2 API for new applications.
+    -->
+    <uses-feature android:name="android.hardware.camera2" android:required="true"/>
+    <uses-feature android:name="android.hardware.camera2.autofocus"/>
+
+    <!-- for running services on boot -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application
+        android:allowBackup="true"
+        android:fullBackupContent="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="fi.tut.pori.otula.roadroamer.MainActivity"/>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="fi.tut.pori.otula.roadroamer.utils.TaskPerformer"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter android:priority="1000">
+                <action android:name="android.location.PROVIDERS_CHANGED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </service>
+<!--
+        <service
+            android:name="fi.tut.pori.otula.roadroamer.utils.SimpleCamera2ServicePublish"
+            android:enabled="true"
+            android:exported="false">
+        </service>
+-->
+
+        <receiver android:name="fi.tut.pori.otula.roadroamer.utils.ServiceStarter">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

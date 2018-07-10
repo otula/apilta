@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_report"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="tut.pori.alertapplication.ReportActivity"
+    android:keepScreenOn="true">
+
+    <!-- visible when user is browsing through available alerts -->
+    <LinearLayout
+        android:id="@+id/report_layout_alerts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/report_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/report_no_active"
+        style="@style/text_large"
+        android:textAlignment="center"/>
+
+    <ImageView
+        android:id="@+id/report_image_alert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/unknown"
+        android:scaleType="centerInside"/>
+
+    <TextView
+        android:visibility="invisible"
+        android:id="@+id/report_counter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/report_no_active"
+        style="@style/text_large"
+        android:textAlignment="center"/>
+
+    <Button
+        android:id="@+id/report_button_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/report_take_photo"
+        style="@style/text_medium"
+        android:textAlignment="center"
+        android:visibility="gone"
+        android:scaleType="centerInside"/>
+
+    </LinearLayout>
+
+    <!-- visible when the main view is shown -->
+    <LinearLayout
+        android:id="@+id/report_layout_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/report_alerts_ahead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorListAhead"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/report_alerts_in_range"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/report_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/no_active"
+                android:scaleType="centerInside"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:map="http://schemas.android.com/apk/res-auto"
+              map:mapType="normal"
+              map:uiCompass="false"
+              map:uiRotateGestures="false"
+              map:uiScrollGestures="false"
+              map:uiTiltGestures="false"
+              map:uiZoomControls="false"
+              map:uiZoomGestures="false"
+              android:name="com.google.android.gms.maps.MapFragment"
+              android:id="@+id/report_map"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"/>
+
+</RelativeLayout>

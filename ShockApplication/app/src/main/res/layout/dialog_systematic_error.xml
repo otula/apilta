@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_systematic_error_description"/>
+
+    <TextView
+        android:id="@+id/acc_x"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/not_available"/>
+
+    <TextView
+        android:id="@+id/acc_y"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/not_available"/>
+
+    <TextView
+        android:id="@+id/acc_z"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/not_available"/>
+
+    <TextView
+        android:id="@+id/acc_xyz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/not_available"/>
+
+    <TextView
+        android:id="@+id/acc_xyz_mean"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/not_available"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/location_delay_gps"/>
+
+        <TextView
+            android:id="@+id/location_delay_gps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/not_available"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/milliseconds"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/location_delay_network_provides"/>
+
+        <TextView
+            android:id="@+id/location_delay_network_provider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/not_available"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/milliseconds"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"/>
+
+    <Button
+        android:id="@+id/button_discard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/discard"/>
+
+</LinearLayout>

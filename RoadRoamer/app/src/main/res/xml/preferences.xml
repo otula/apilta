@@ -1,0 +1,105 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/pref_header_general"
+        android:key="pref_key_general_settings">
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="background_processing_allowed"
+            android:title="@string/pref_title_allow_background_processing"/>
+        <SwitchPreference
+            android:defaultValue="false"
+            android:dependency="demo_mode"
+            android:key="location_gps_allowed"
+            android:title="@string/pref_title_allow_gps"/>
+        <SwitchPreference
+            android:defaultValue="false"
+            android:dependency="demo_mode"
+            android:key="location_network_allowed"
+            android:title="@string/pref_title_allow_network"/>
+        <SwitchPreference
+            android:defaultValue="false"
+            android:disableDependentsState="true"
+            android:key="demo_mode"
+            android:title="@string/pref_title_demo_mode"/>
+
+        <!-- not really needed
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/pref_text_size_titles"
+            android:entryValues="@array/pref_text_size_values"
+            android:key="font_size"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="@string/pref_title_font_size"/>
+        -->
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/pref_header_server"
+        android:key="pref_key_server_settings">
+        <EditTextPreference
+            android:inputType="textNoSuggestions"
+            android:key="user_name"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/pref_title_user_name"/>
+
+        <EditTextPreference
+            android:inputType="textPassword"
+            android:key="user_password"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/pref_title_user_password"/>
+
+        <EditTextPreference
+            android:inputType="number"
+            android:key="back_end_id"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/pref_title_back_end_id"/>
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="server_use_custom"
+            android:title="@string/pref_title_use_custom_uri"/>
+
+        <EditTextPreference
+            android:dependency="server_use_custom"
+            android:hint="@string/pref_hint_server_uri"
+            android:inputType="textUri"
+            android:key="server_custom_uri"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/pref_title_server_uri"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/pref_header_notifications"
+        android:key="pref_key_notification_settings">
+        <!-- A 'parent' preference, which enables/disables child preferences (below)
+         when checked/unchecked. -->
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="notifications_allowed"
+            android:title="@string/pref_title_allow_notifications"/>
+        <!-- not really needed
+        <RingtonePreference
+            android:defaultValue="content://settings/system/notification_sound"
+            android:dependency="notifications_allowed"
+            android:key="notifications_new_message_ringtone"
+            android:ringtoneType="notification"
+            android:title="@string/pref_title_ringtone"/>
+        <SwitchPreference
+            android:defaultValue="true"
+            android:dependency="notifications_allowed"
+            android:key="notifications_new_message_vibrate"
+            android:title="@string/pref_title_vibrate"/>
+        -->
+    </PreferenceCategory>
+
+</PreferenceScreen>

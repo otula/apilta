@@ -1,0 +1,67 @@
+<resources>
+    <!-- common -->
+    <string name="app_name">AlertApplication</string>
+
+    <!-- common -->
+    <string name="title_dialog_error">Error</string>
+    <string name="title_dialog_confirmation">Please Confirm</string>
+    <string name="button_yes">Yes</string>
+    <string name="button_no">No</string>
+    <string name="button_ok">OK</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="title_dialog_selection">Select</string>
+
+    <!-- debug toast messages -->
+    <string name="error_add_alert_failed">Add alert failed.</string>
+    <string name="notification_alert_added">Alert added.</string>
+    <string name="notification_new_alerts">New alerts in range.</string>
+    <string name="notification_no_alerts">No alerts in range.</string>
+
+    <!-- report activity -->
+    <string name="report_adding_alert">Adding new alert…</string>
+    <string name="report_no_active">No active alert</string>
+    <string name="report_error_location">Cannot resolve current location.</string>
+    <string name="report_menu_settings">Settings</string>
+    <string name="report_menu_map">Map</string>
+    <string name="report_menu_main">Home</string>
+    <string name="report_take_photo">Report with Photo</string>
+
+    <!-- settings activity -->
+    <string name="settings_label_allow_photos">Allow photos in alerts</string>
+    <string name="settings_label_use_time_filter">Filter alerts by time</string>
+    <string name="settings_label_allow_map_gestures">Allow map gestures</string>
+    <string name="settings_label_keep_files">Keep files after upload</string>
+    <string name="settings_label_use_tts">Text-to-Speech enabled</string>
+    <string name="settings_label_use_gps">GPS enabled</string>
+    <string name="settings_label_min_location_distance">Minimum location check distance (m)</string>
+    <string name="settings_label_min_location_time">Minimum location check time (s)</string>
+    <string name="settings_label_use_network_provider">Network provider enabled</string>
+    <string name="settings_label_alert_check_interval">Alert check interval (s)</string>
+    <string name="settings_label_hide_users_alerts">Hide user\'s alerts</string>
+    <string name="settings_label_service_uri">Service URI</string>
+    <string name="settings_hint_service_uri">e.g. http://example.org/container/rest/</string>
+    <string name="settings_label_range">Range (km)</string>
+    <string name="settings_label_username">Username</string>
+    <string name="settings_label_password">Password</string>
+    <string name="settings_label_listen_group_ids">Alert groups to listen</string>
+    <string name="settings_hint_listen_group_ids">Alert group identifiers separated by comma</string>
+    <string name="settings_label_listen_alert_types">Alert types to listen for new alerts</string>
+    <string name="settings_label_report_group_ids">Alert groups to submit new alerts</string>
+    <string name="settings_hint_report_group_ids">Alert group identifiers separated by comma</string>
+    <string name="settings_label_report_alert_types">Alert types for reporting new alerts</string>
+    <string name="settings_label_button_save">Save settings</string>
+    <string name="settings_error_save_failed">Save failed: invalid settings.</string>
+    <string name="settings_saved">Settings saved.</string>
+    <string name="settings_title_loading">Loading…</string>
+    <string name="settings_notification_checking_credentials">Checking credentials…</string>
+    <string name="settings_error_bad_credentials">Credential check failed: check username, password and network connection.</string>
+    <string name="settings_confirm_save">Save settings?</string>
+
+    <!-- alert names -->
+    <string name="animal_on_road">Animal on road</string>
+    <string name="broken_road_sign">Broken road sign</string>
+    <string name="general_accident">General accident</string>
+    <string name="traffic">Slow traffic</string>
+    <string name="unknown">Unknown</string>
+
+</resources>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="css/mapicker.css">
+		<title>Mapicker Web Page</title>
+	    <script src="js/lib/jquery-3.2.1.min.js"></script>
+    	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry&key=GOOGLE_MAPS_API_KEY"></script>
+    	<script src="js/mapicker.js"></script>
+	</head>
+	<body onload="mapicker.initialize()">
+		<div id="map-canvas"><!-- map overlay --></div>
+		<div id="photo-overlay" class="hidden"><!-- photo overlay -->
+			<div class="tools">
+				<button onclick="mapicker.previousPhoto()">Previous</button>
+				<button onclick="mapicker.showStreetView()">Streetview</button>
+				<button onclick="mapicker.hidePhotoOverlay()">Close</button>
+				<button onclick="mapicker.nextPhoto()">Next</button>
+			</div>
+			<div class="photo" id="photo"></div>
+		</div>
+	</body>
+</html>

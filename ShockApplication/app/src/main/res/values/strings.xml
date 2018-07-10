@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">ShockApplication</string>
+    <string name="count_total">Count (total)</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="request_permissions">Request Permissions</string>
+    <string name="send">Send Measurements</string>
+    <string name="toast_sending_measurements">Sending measurements...</string>
+    <string name="toast_permission_granted">Permission was granted, you can try to re-enable sensors.</string>
+    <string name="toast_permission_denied">Sensor permission was denied.</string>
+    <string name="print_log">Print log</string>
+    <string name="show_systematic_error">Show Systematic Error</string>
+    <string name="toast_no_measurements">No measurements.</string>
+    <string name="save_settings">Save Settings</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="toast_invalid_credentials">Bad username or password.</string>
+    <string name="toast_settings_saved">Settings saved.</string>
+    <string name="save">Save</string>
+    <string name="discard">Discard</string>
+    <string name="dialog_systematic_error_title">Systematic Error</string>
+    <string name="dialog_systematic_error_description">Do not move the device.</string>
+    <string name="not_available">N/A</string>
+    <string name="milliseconds">ms</string>
+    <string name="public_data">Create data as public</string>
+    <string name="location_delay_gps">Location Delay (GPS):</string>
+    <string name="location_delay_network_provides">Location Delay (network):</string>
+</resources>

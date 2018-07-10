@@ -1,0 +1,53 @@
+/**
+ * 	CSS for mapicker
+ */
+
+html, body {
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+/**
+ * 	add/modify point window
+ */
+#photo-overlay {
+	padding: "5px";
+	background-color:rgba(0,0,255,0.5);
+	width: 90%;
+	z-index: 105;
+	bottom: 0;
+	position: fixed;
+	top: 5%;
+	left: 5%;
+	height: 90%; /* overlap the entire map */
+}
+
+/**
+ * 	map overlay
+ */
+#map-canvas {
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	z-index: 100;
+}
+
+.hidden {
+	display : none;
+}
+
+.photo{
+	position:relative;
+	height: 100%;
+	width: 100%;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat
+}
+
+.tools{
+	position: relative;
+	float: left;
+	z-index: 200;
+}

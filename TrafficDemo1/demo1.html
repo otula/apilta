@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="css/demo1.css">
+		<title>Apilta Traffic Demo 1</title>
+	    <script src="js/lib/jquery-3.2.1.min.js"></script>
+    	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry&key=GOOGLE_MAPS_API_KEY"></script>
+    	<script src="js/demo1.js"></script>
+	</head>
+	<body onload="demo1.initialize()">
+		<div id="map-canvas"><!-- map overlay --></div>
+		<div id="datapoints-overlay" class="hidden">
+			<div class="tools">
+				<button id="previousButton" onclick="demo1.previousDataPointSet()">Previous</button>
+				<button onclick="demo1.showStreetView()">Streetview</button>
+				<button onclick="demo1.hideDataPointsOverlay()">Close</button>
+				<button id="nextButton" onclick="demo1.nextDataPointSet()">Next</button>
+			</div>
+			<div id="photo-container"><!--populated dynamically --></div>
+			<div id="datapoint-container"><!--populated dynamically --></div>
+		</div>
+	</body>
+</html>

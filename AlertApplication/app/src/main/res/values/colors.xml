@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <!-- main menu alerts lists -->
+    <color name="colorListHighlight">#90C3D4</color>
+    <color name="colorListAhead">#CCE1E8</color>
+    <!-- alert range circle colors -->
+    <color name="colorAlertAnimalOnRoad">#40C00000</color>
+    <color name="colorAlertBrokenRoadSign">#40FF8000</color>
+    <color name="colorAlertGeneralAccident">#40FF8000</color>
+    <color name="colorAlertTrafficJam">#40FF8000</color>
+    <color name="colorAlertUnknown">#400000FF</color>
+</resources>

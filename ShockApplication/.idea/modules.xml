@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file:///stuff/svn/turva/apilta_sorsat/ShockApplication/ShockApplication.iml" filepath="/stuff/svn/turva/apilta_sorsat/ShockApplication/ShockApplication.iml" />
+      <module fileurl="file:///stuff/svn/turva/apilta_sorsat/ShockApplication/app/ShockApplication-app.iml" filepath="/stuff/svn/turva/apilta_sorsat/ShockApplication/app/ShockApplication-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/apilta_sorsat-ShockApplication.iml" filepath="$PROJECT_DIR$/apilta_sorsat-ShockApplication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+    </modules>
+  </component>
+</project>
