@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="raspi_conf_web" basedir=".">
+	<property environment="env."/>
+	<property name="env.CLASSPATH" value=""/>
+	<fail message="Unset $CLASSPATH / %CLASSPATH% before running Ant!">
+		<condition>
+			<not>
+				<equals arg1="${env.CLASSPATH}" arg2=""/>
+			</not>
+		</condition>
+	</fail>
+
+	<property file="${propertyfilelocation}"/>
+	<property file="build.properties"/>
+	<property name="build" value="${basedir}/build"/>
+	
+	<path id="classpath">
+        <fileset dir="${tomcat.home}/lib">
+            <include name="*.jar"/>
+        </fileset>
+		<fileset dir="${tomcat.home}/bin">
+		     <include name="*.jar"/>
+		 </fileset>
+		 <fileset dir="lib">
+		     <include name="*.jar"/>
+		 </fileset>
+    </path>
+	
+    <taskdef name="deploy"    classname="org.apache.catalina.ant.DeployTask">
+    	   <classpath refid="classpath" />
+    </taskdef>
+
+    <taskdef name="undeploy"  classname="org.apache.catalina.ant.UndeployTask">
+    	   <classpath refid="classpath" />
+    </taskdef>
+
+	
+    <target name="init">
+        <tstamp/>
+    </target>
+    
+    <target name="diagnostics" description="diagnostics">
+        <diagnostics/>
+    </target>
+
+    <target name="clean" description="Deletes the Web Application's war directory and war file">
+        <echo message="Deleting ${app.name}'s build directory ..."/>
+        <delete>
+        	<fileset dir="${build}">
+    			<include name="${app.name}.war"/>
+				<include name="${app.name}.jar"/>
+        	</fileset>
+    	</delete>
+    	<delete dir="${build}/classes"/>
+    	<delete dir="${build}/${app.name}"/>
+    </target>
+
+    <target name="prepare" description="Creates the Web Application's war directory" depends="init">
+        <echo message="Creating ${app.name}'s war directory ..."/>
+        <mkdir dir="${build}"/>
+    	<mkdir dir="${build}/classes"/>
+    	<mkdir dir="${build}/${app.name}"/>
+        <mkdir dir="${build}/${app.name}/WEB-INF"/>
+        <mkdir dir="${build}/${app.name}/WEB-INF/classes"/>
+        <mkdir dir="${build}/${app.name}/WEB-INF/lib"/>
+    	<mkdir dir="${build}/${app.name}/META-INF"/>
+    </target>
+
+    <target name="build" description="Builds the Web Application" depends="prepare">
+        <echo message="Building ${app.name} ..."/>
+        <javac srcdir="src" debug="true" destdir="${build}/classes"	classpathref="classpath">
+			<include name="**/*.java"/>
+        </javac>
+    </target>
+    	
+    <target name="webapp" description="Copies and builds all files" depends="build">
+    	<!--Copy all web files-->
+        <copy todir="${build}/${app.name}/">
+            <fileset dir="web">
+                <include name="**/*.html"/>
+                <include name="**/*.jsp"/>
+                <include name="**/*.css"/>
+                <include name="**/*.gif"/>
+                <include name="**/*.jpg"/>
+                <include name="**/*.png"/>
+                <include name="**/*.js"/>
+            </fileset>
+        </copy>
+        <!--Copy WEB-INF files-->
+    	<!--	Copy classes to WEB-INF/classes -->
+    	<copy todir="${build}/${app.name}/WEB-INF/classes">
+    		<fileset dir="classes" includes="**"/>
+    	</copy>
+    	<jar jarfile="${build}/${app.name}.jar">
+    		<fileset dir="${build}/classes" includes="**"/>
+        </jar>
+    	<copy todir="${build}/${app.name}/WEB-INF/lib" file="${build}/${app.name}.jar"/>
+    	<!-- 	Copy necessary libraries -->
+		<copy todir="${build}/${app.name}/WEB-INF/lib">
+    		<fileset dir="lib">
+    			<include name="*.jar"/>
+    		</fileset>
+    	</copy>
+    	<!--Copy META-INF files-->
+        <copy todir="${build}/${app.name}/META-INF">
+            <fileset dir="conf">
+                <include name="context.xml" />
+            </fileset>
+        </copy>
+    	<!-- Copy .xml configuration & .properties files -->
+    	<copy overwrite="true" todir="${build}/${app.name}/WEB-INF" preservelastmodified="true">
+            <fileset dir="conf">
+                <include name="*.xml"/> <!-- xml configuration files -->
+            	<include name="*.properties"/>	<!-- Property files -->
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="package" description="Packages the Web Application's web archive file" depends="webapp">
+        <echo message="Packaging ${app.name}'s war file ..."/>
+        <delete file="${build}/${app.name}.war"/>
+        <jar jarfile="${build}/${app.name}.war">
+            <fileset dir="${build}/${app.name}" includes="**"/>
+        </jar>
+    </target>
+
+    <target name="reload" description="Reloads the Web Application" depends="package">
+        <echo message="Reloading ${app.name} ..."/>
+        <reload url="${manager.url}" username="${username}" password="${password}" path="/${app.name}"/>
+    </target>
+
+    <target name="remove" description="Removes the Web Application">
+        <echo message="Removing ${app.name} ..."/>
+        <remove url="${manager.url}" username="${username}" password="${password}" path="/${app.name}"/>
+    </target>
+
+    <target name="deploy" description="Deploys the Web Application" depends="package">
+        <echo message="Deploying ${app.name} ..."/>
+        <deploy url="${manager.url}" username="${username}" password="${password}" path="/${app.name}"
+            war="file:${build}/${app.name}.war" update="true"/>
+    </target>
+    
+    <target name="undeploy" description="Undeploys the Web Application">
+        <echo message="Undeploying ${app.name} ..."/>
+        <undeploy url="${manager.url}" username="${username}" password="${password}" path="/${app.name}"/>
+    </target>
+    
+    <target name="debug">
+        <echo message="Lists the properties for debugging purposes ..."/>
+        <echo message="app.name    = ${app.name}"/>
+        <echo message="basedir     = ${basedir}"/>
+        <echo message="user.home   = ${user.home}"/>
+        <echo message="tomcat.home = ${tomcat.home}"/>
+		<echo message="tomcat library path = ${tomcat.home}/lib"/>
+        <echo message="manager.url = ${manager.url}"/>
+        <echo message="username    = ${username}"/>
+        <echo message="password    = ${password}"/>
+   </target>
+</project>

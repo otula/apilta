@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<task>
+	<createdTimestamp>2017-07-04T10:15:31Z</createdTimestamp>
+	<description>An example task that can be used to test the addTask method</description>
+	<name>Example Task</name>
+	<taskIdList>
+		<taskId>1</taskId>
+	</taskIdList>
+	<taskTypeList>
+		<taskType>gather</taskType>
+	</taskTypeList>
+	<updatedTimestamp>2017-07-04T10:15:31Z</updatedTimestamp>
+	<userDetails>
+		<userId>1</userId>
+	</userDetails>
+	<backendList>
+		<backend>
+			<backendId>1</backendId>
+			<taskStatus>NOT_STARTED</taskStatus>
+		</backend>
+	</backendList>
+	<callbackUri>http://127.0.0.1:8080/ApiltaService/rest/sensors/taskFinished</callbackUri>
+	<when>
+		<condition>
+			<terms>
+				<entry>
+					<key>location/point</key>
+					<value>61.4927406,21.8008332</value>
+				</entry>
+			</terms>
+		</condition>
+		<condition>
+			<terms>
+				<entry>
+					<key>location/point</key>
+					<value>61.4775775,21.7857753</value>
+				</entry>
+			</terms>
+		</condition>
+	</when>
+	<what>
+		<output>
+			<feature>parking/location</feature> <!-- this will return only the coordinates -->
+		</output>
+		<output>
+			<feature>parking/details</feature> <!-- this will return all known details of the parking place -->
+		</output>
+	</what>
+</task>

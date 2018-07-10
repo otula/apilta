@@ -1,0 +1,7 @@
+#These settings are for default build configuration, make modifications as needed
+app.name=BackendWeb
+tomcat.home=/usr/local/apache-tomcat
+manager.url=http://localhost:8080/manager/text/
+username=user
+password=password
+propertyfilelocation=build.properties

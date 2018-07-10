@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="css/conf.css">
+		<title>RaspiWebConf</title>
+	    <script src="js/lib/jquery-3.3.1.min.js"></script>
+    	<script src="js/conf.js"></script>
+	</head>
+	<body onload="conf.initialize()">
+		<div class="info">
+			Image Size:<div id="imageSize"><!-- dynamically populated --></div><br>
+			Show Lines: <input type="checkbox" id="showLines"/>
+		</div>
+		<div class="config">
+			Red line (up):<input id="up" type="number"/><br>
+			Red line limit:<input id="upLimit" type="number"/><br>
+			Blue line (down):<input id="down" type="number"/><br>
+			Blue line limit:<input id="downLimit" type="number"/><br>
+			Left line limit:<input id="leftLimit" type="number"/><br>
+			Right line limit:<input id="rightLimit" type="number"/><br>
+			Crop to limits:<input id="cropLimits" type="checkbox"/><br>
+			Threshold min:<input id="thresholdMin" type="number"/><br>
+			Threshold max:<input id="thresholdMax" type="number"/><br>
+			<input onclick="conf.save()" type="button" value="Save"><br>
+		</div>
+		<canvas id="imageCanvas"><!-- populated dynamically --></canvas>
+		<div id="status"><!-- populated dynamically --></div>
+	</body>
+</html>

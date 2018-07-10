@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<task>
+	<createdTimestamp>2017-01-01T01:01:01Z</createdTimestamp>
+	<description>Test task for Raspberry Pi devices</description>
+	<dataVisibility>PRIVATE</dataVisibility>
+	<name>RaspberryTask</name>
+	<taskState>ACTIVE</taskState>
+	<userDetails>
+	    <userId>2</userId>
+	</userDetails>
+	<backendList>
+	    <backend>
+		<backendId>10</backendId>
+	    </backend>
+	    <backend>
+		<backendId>11</backendId>
+	    </backend>
+	</backendList>
+	<taskTypeList>
+		<taskType>gather</taskType>
+	</taskTypeList>
+	<when>
+	    <condition>
+		<terms>
+		    <entry>
+		        <key>location/point</key>
+		        <value>61.495803,21.802601</value>
+		    </entry>
+		</terms>
+	    </condition>
+	    <condition>
+		<terms>
+		    <entry>
+		        <key>location/point</key>
+		        <value>61.492116,21.800862</value>
+		    </entry>
+		</terms>
+	    </condition>
+	</when>
+	<what>
+	    <output>
+		<feature>sensor/camera</feature>
+	    </output>
+	    <output>
+		<feature>sensor/location</feature>
+	    </output>
+	</what>
+</task>
