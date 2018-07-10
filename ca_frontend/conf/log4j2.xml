@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright 2014 Tampere University of Technology, Pori Department
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+  http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<Configuration status="WARN">
+	<Appenders>
+		<!-- Print to default console output -->
+		<Console name="Console" target="SYSTEM_OUT">
+			<!-- Print date as ISO8601, include the called (method) information. Use the version without method name for better performance -->
+			<PatternLayout pattern="%d{ISO8601} [%t] %-5level %logger{36} - method: %M - %msg%n" />
+			<!-- Print date as ISO8601, omit the method name -->
+			<!-- <PatternLayout pattern="%d{ISO8601} [%t] %-5level %logger{36} - %msg%n"/> -->
+		</Console>
+	</Appenders>
+	<Loggers>
+		<!-- Print everything ranked debug or higher -->
+		<Root level="debug">
+			<AppenderRef ref="Console" />
+		</Root>
+		<!-- Filter out spring's output -->
+		<Logger name="org.springframework" level="warn">
+			<AppenderRef ref="Console"/>
+		</Logger>
+		<!-- Filter out apache's output, this is mostly httpclient -->
+		<Logger name="org.apache.http" level="warn">
+			<AppenderRef ref="Console"/>
+		</Logger>
+		<!-- Filter out BeanName generator debug messages -->
+		<Logger name="core.tut.pori.context.CoreBeanNameGenerator" level="warn">
+			<AppenderRef ref="Console"/>
+		</Logger>
+		<!-- Filter out Quartz scheduler debug messages -->
+		<Logger name="org.quartz.core" level="warn">
+			<AppenderRef ref="Console"/>
+		</Logger>
+		<!-- Filter out http debug -->
+		<Logger name="core.tut.pori.http" level="warn" additivity="false">
+			<AppenderRef ref="Console"/>
+		</Logger>
+		<!-- Filter out utils debug -->
+		<Logger name="core.tut.pori.utils" level="warn">
+			<AppenderRef ref="Console"/>
+		</Logger>
+		<!-- Filter out core dao debug -->
+		<Logger name="core.tut.pori.dao" level="warn" additivity="false">
+			<AppenderRef ref="Console"/>
+		</Logger>
+	</Loggers>
+</Configuration>

@@ -1,0 +1,5 @@
+aopalliance-1.0.jar
+
+PUBLIC DOMAIN
+
+http://aopalliance.sourceforge.net/

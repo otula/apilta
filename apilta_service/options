@@ -1,0 +1,16 @@
+	-subpackages core:service
+	-splitindex
+	-public
+	-windowtitle "APILTA API 2.0 Specification"
+	-doctitle "APILTA API 2.0 Specification"
+	-header "<b>APILTA API 2.0</b>"
+	-bottom "Copyright &copy; 2015-2018 Tampere University of Technology, Pori Department."
+	-group "Reference Service API" "service.tut.pori.apilta.alerts.reference:service.tut.pori.apilta.sensors.reference"
+	-group "Core Packages" "core.*"
+	-group "Service Packages" "service.*"
+	-nodeprecatedlist
+	-linksource
+	-sourcetab 2
+	-notree
+	-charset "UTF-8"
+	-docencoding "UTF-8"

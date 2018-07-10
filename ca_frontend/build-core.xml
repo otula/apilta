@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ca_frontend-core" basedir="."
+	xmlns:if="ant:if">
+	<property environment="env."/>
+	<property name="env.CLASSPATH" value=""/>
+	<fail message="Unset $CLASSPATH / %CLASSPATH% before running Ant!">
+		<condition>
+			<not>
+				<equals arg1="${env.CLASSPATH}" arg2=""/>
+			</not>
+		</condition>
+	</fail>
+	
+	<!-- retain the basedir of ca_frontend-core project -->
+	<dirname property="ca_frontend-core.basedir" file="${ant.file.ca_frontend-core}"/>
+
+	<property file="${ca_frontend-core.basedir}/build-core.properties"/>
+	<property name="build" location="${basedir}/build"/>
+	<property name="dist" location="${basedir}/dist"/>
+	<property name="debugBuild" value="true"/> <!-- Debug build is on if not explicitly disabled -->
+	<property name="versionString" value=""/> <!-- version string to be appended to .jar file names, disabled by default -->
+	<property name="distCoreJarName" value="${core.project.name}${versionString}.jar"/> <!-- use project name for the jar-file -->
+	<property name="includeStaticWebFiles" value="true"/> <!-- include static web files unless explicitly set to false (in a importing build file) -->
+	
+	<path id="classpath">
+		<!-- Include all elements that Tomcat exposes to applications -->
+		<fileset dir="${tomcat.home}/lib">
+			<include name="*.jar"/>
+		</fileset>
+		<!-- Include application specific libraries -->
+		<fileset dir="${ca_frontend-core.basedir}/lib">
+			<include name="*.jar"/>
+		</fileset>
+    </path>
+	
+    <taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask">
+		<classpath refid="classpath" />
+    </taskdef>
+
+    <taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask">
+		<classpath refid="classpath" />
+    </taskdef>
+
+    <target name="init">
+        <tstamp/>
+    </target>
+    
+    <target name="diagnostics" description="diagnostics">
+        <diagnostics/>
+    </target>
+
+    <target name="clean" description="Cleans the Web Application's build directory">
+        <echo message="Cleaning ${app.name}'s ${build} directory ..."/>
+		<delete failonerror="false" includeEmptyDirs="true">
+			<fileset dir="${build}">
+				<include name="**/*"/>
+			</fileset>
+        </delete>
+    </target>
+	
+	<target name="dist-clean" description="Cleans the dist directory" depends="clean">
+	    <echo message="Cleaning ${app.name}'s ${dist} directory ..."/>
+		<delete failonerror="false" includeEmptyDirs="true">
+			<fileset dir="${dist}">
+				<include name="**/*"/>
+			</fileset>
+        </delete>
+	</target>
+
+    <target name="prepare" description="Creates the Web Application's war directory" depends="init">
+        <echo message="Creating ${app.name}'s war directory ..."/>
+        <mkdir dir="${build}"/>
+    	<mkdir dir="${build}/classes-core"/>
+    	<mkdir dir="${build}/${app.name}"/>
+        <mkdir dir="${build}/${app.name}/WEB-INF"/>
+        <mkdir dir="${build}/${app.name}/WEB-INF/lib"/>
+		<mkdir dir="${dist}"/>
+    </target>
+	
+	<extension-point name="ready-to-build" depends="prepare, build-settings"/>
+
+    <extension-point name="build" description="Builds the Web Application" depends="ready-to-build, build-core">
+        <!-- This is a dummy target to invoke other build targets (that are defined in depends attribute), nothing else is needed -->
+	</extension-point>
+	
+	<target name="build-settings" description="Set build properties" depends="">
+		<presetdef name="javac"> <!-- setting a few javac properties globally -->
+			<javac includeantruntime="false" debug="${debugBuild}" />
+		</presetdef>
+		<echo if:true="${debugBuild}">Building with debug symbols...</echo>
+	</target>
+	
+	<target name="build-core" description="Builds core files" depends="ready-to-build">
+		<!-- Build core files -->
+		<echo message="Building and Jarring '${core.project.name}' core..."/>
+        <javac srcdir="${ca_frontend-core.basedir}/src"
+			destdir="${build}/classes-core"
+			classpathref="classpath">
+			<include name="**/*.java"/>
+        </javac>
+		<!-- jarrify files -->
+		<jar jarfile="${dist}/${distCoreJarName}">
+    		<fileset dir="${build}/classes-core" includes="**"/>
+        </jar>
+	</target>
+    	
+    <target name="webapp" description="Copies and builds all files" depends="build">
+    	<!--Copy all static web files-->
+		<echo if:true="${includeStaticWebFiles}">Copy static files from ${ca_frontend-core.basedir}/web</echo>
+        <copy if:true="${includeStaticWebFiles}" todir="${build}/${app.name}/" preservelastmodified="true">
+            <fileset dir="${ca_frontend-core.basedir}/web">
+                <include name="**/*.html"/>
+                <include name="**/*.jsp"/>
+                <include name="**/*.css"/>
+                <include name="**/*.gif"/>
+                <include name="**/*.jpg"/>
+                <include name="**/*.png"/>
+                <include name="**/*.js"/>
+            </fileset>
+        </copy>
+		
+        <!-- Copy WEB-INF files-->
+    	<!-- Copy .xml configuration & .properties files -->
+		<echo>Copy configuration files from ${ca_frontend-core.basedir}/conf</echo>
+    	<copy overwrite="true" todir="${build}/${app.name}/WEB-INF" preservelastmodified="true">
+            <fileset dir="${ca_frontend-core.basedir}/conf">
+                <include name="*.xml"/> <!-- xml configuration files -->
+            	<include name="*.properties"/>	<!-- Property files -->
+            </fileset>
+        </copy>
+
+		<!-- Copy application .jar files -->
+		<echo>Copy core jar from ${dist}/${distCoreJarName}</echo>
+    	<copy todir="${build}/${app.name}/WEB-INF/lib" preservelastmodified="true">
+			<fileset dir="${dist}">
+				<include name="${distCoreJarName}"/>
+			</fileset>
+		</copy>
+		
+    	<!-- Copy necessary libraries -->
+		<echo>Copy libraries from ${ca_frontend-core.basedir}/lib</echo>
+		<copy todir="${build}/${app.name}/WEB-INF/lib" preservelastmodified="true">
+    		<fileset dir="${ca_frontend-core.basedir}/lib">
+    			<include name="*.jar"/>
+    		</fileset>
+    	</copy>
+    </target>
+	
+	<extension-point name="ready-to-package" depends="webapp" />
+
+    <target name="package" description="Packages the Web Application's web archive file" depends="ready-to-package">
+        <echo message="Packaging ${app.name}'s war file ..."/>
+        <jar jarfile="${dist}/${app.name}.war">
+            <fileset dir="${build}/${app.name}" includes="**"/>
+        </jar>
+    </target>
+
+    <target name="reload" description="Reloads the Web Application" depends="package">
+        <echo message="Reloading ${app.name} ..."/>
+        <reload url="${manager.url}" username="${username}" password="${password}" path="/${app.name}"/>
+    </target>
+
+    <target name="remove" description="Removes the Web Application">
+        <echo message="Removing ${app.name} ..."/>
+        <remove url="${manager.url}" username="${username}" password="${password}" path="/${app.name}"/>
+    </target>
+
+    <target name="deploy" description="Deploys the Web Application" depends="package">
+        <echo message="Deploying ${app.name} ..."/>
+        <deploy url="${manager.url}" username="${username}" password="${password}" path="/${app.name}"
+            war="file:${dist}/${app.name}.war" update="true"/>
+    </target>
+    
+    <target name="undeploy" description="Undeploys the Web Application">
+        <echo message="Undeploying ${app.name} ..."/>
+        <undeploy url="${manager.url}" username="${username}" password="${password}" path="/${app.name}"/>
+    </target>
+    
+    <target name="debug">
+        <echo message="Lists the properties for debugging purposes ..."/>
+        <echo message="app.name    = ${app.name}"/>
+		<echo message="debugBuild  = ${debugBuild}"/>
+		<echo message="versionStr  = ${versionString}"/>
+        <echo message="basedir     = ${basedir}"/>
+        <echo message="user.home   = ${user.home}"/>
+        <echo message="tomcat.home = ${tomcat.home}"/>
+		<echo message="tomcat library path = ${tomcat.home}/lib"/>
+        <echo message="manager.url = ${manager.url}"/>
+        <echo message="username    = ${username}"/>
+        <echo message="password    = ${password}"/>
+   </target>
+</project>

@@ -1,0 +1,14 @@
+#Name of the application when deployed to Tomcat
+app.name=ApiltaService
+
+#Url of manager application of tomcat
+manager.url=http://localhost:8080/manager/text/
+
+#Username for tomcat manager application
+username=admin
+
+#Password for tomcat manager application
+password=password
+
+#Path to the source directory where main source tree & build.xml is
+cafrontend.sourcedir=/path/to/main/source/tree

@@ -1,0 +1,108 @@
+########################################################################
+#
+# Copyright 2016 Tampere University of Technology, Pori Department
+# 
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#  http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+########################################################################
+
+===============================================================================
+measurements
+------------
+measurement_id		VARCHAR (40 characters, primaryKey)
+backend_id		BIGINT (index)
+row_updated		TIMESTAMP (CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)
+row_created		TIMESTAMP ('0000-00-00 00:00:00')
+
+measurements_tasks
+------------------
+measurement_id		VARCHAR (40 characters, unique 1/2)
+task_id			VARCHAR (40 characters, unique 2/2)
+row_updated		TIMESTAMP (CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)
+row_created		TIMESTAMP ('0000-00-00 00:00:00')
+
+measurements_tasks_conditions
+-----------------------------
+task_id			VARCHAR (40 characters, index)
+condition_id		VARCHAR (40 characters, index)
+condition_key		VARCHAR (40 characters)
+condition_value		VARCHAR (255 characters)
+row_updated		TIMESTAMP (CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)
+row_created		TIMESTAMP ('0000-00-00 00:00:00')
+
+measurements_tasks_ouputs
+-------------------------
+task_id			VARCHAR (40 characters, unique 1/2)
+feature			VARCHAR (40 characters, unique 2/2)
+row_updated		TIMESTAMP (CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)
+row_created		TIMESTAMP ('0000-00-00 00:00:00')
+
+measurements_files
+------------------
+guid			VARCHAR (40 characters, unique 1/2)
+backend_id		BIGINT (unique 2/2)
+row_updated		TIMESTAMP (CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)
+row_created		TIMESTAMP ('0000-00-00 00:00:00')
+
+===============================================================================
+
+alerts_groups
+-------------
+alert_group_id		BIGINT (primaryKey, autoincrement)
+name			VARCHAR (255 characters)
+description		VARCHAR (2040 characters, NULL OK)
+row_updated		TIMESTAMP (CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)
+row_created		TIMESTAMP ('0000-00-00 00:00:00')
+
+alerts_groups_users
+-------------------
+alert_group_id		BIGINT (index)
+user_id			BIGINT (NULL OK for global permissions)
+permission		INT
+row_updated		TIMESTAMP (CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)
+row_created		TIMESTAMP ('0000-00-00 00:00:00')
+
+===============================================================================
+
+shock_measurements
+------------------
+measurement_id		VARCHAR (40 characters, primaryKey)
+data_visibility		INT (default value: 0 == PRIVATE, index)
+level			INT (NULL OK)
+user_id			BIGINT (index)
+timestamp		DATETIME
+row_updated		TIMESTAMP (CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)
+row_created		TIMESTAMP ('0000-00-00 00:00:00')
+
+shock_accelerometer_data
+------------------------
+measurement_id		VARCHAR (40 characters, primaryKey)
+x_acc			DOUBLE
+y_acc			DOUBLE
+z_acc			DOUBLE
+systematic_error	DOUBLE (NULL OK)
+timestamp		DATETIME (NULL OK)
+row_updated		TIMESTAMP (CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)
+row_created		TIMESTAMP ('0000-00-00 00:00:00')
+
+shock_location_data
+-------------------
+measurement_id		VARCHAR (40 characters, primaryKey)
+latitude		DOUBLE
+longitude		DOUBLE
+heading			DOUBLE (NULL OK)
+speed			DOUBLE (NULL OK)
+timestamp		DATETIME (NULL OK)
+row_updated		TIMESTAMP (CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)
+row_created		TIMESTAMP ('0000-00-00 00:00:00')
+

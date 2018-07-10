@@ -1,0 +1,16 @@
+	-subpackages core:service
+	-splitindex
+	-public
+	-windowtitle "CAFrontEnd API Specification"
+	-doctitle "CAFrontEnd Specification"
+	-header "<b>CAFrontEnd</b>"
+	-bottom "Copyright &copy; 2015 Tampere University of Technology, Pori Department."
+	-group "Reference Service API" "service.tut.pori.contentanalysis.reference:service.tut.pori.facebookjazz.reference:service.tut.pori.twitterjazz.reference:service.tut.pori.contentsuggest.reference:service.tut.pori.contentanalysis.video.reference:service.tut.pori.subtitles.reference"
+	-group "Core Packages" "core.*"
+	-group "Service Packages" "service.*"
+	-nodeprecatedlist
+	-linksource
+	-sourcetab 2
+	-notree
+	-charset "UTF-8"
+	-docencoding "UTF-8"
