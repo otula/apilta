@@ -1,8 +1,6 @@
-Apilta project source code repository
+The APILTA project source code repository
 
-The generated Javadocs for services can be found at:
-
-https://otula.github.io/projektit/apilta-api
+https://www.avoinsatakunta.fi/apilta
 
 
 Contents of this repository
