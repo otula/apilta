@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="apilta" basedir=".">
+	
+	<property file="build.properties"/>	
+	<property file="apilta.properties"/>
+	<property name="distJarName" value="${apilta.project.name}${versionString}.jar"/> <!-- use project name for the jar-file -->
+	<property name="includeStaticWebFiles" value="false"/>	<!-- do not include static web files from ca_frontend-core project -->
+
+	<fail message="Property 'cafrontend.sourcedir' MUST be defined!">
+		<condition>
+			<or>
+				<not>
+					<isset property="cafrontend.sourcedir"/>
+				</not>
+			</or>
+		</condition>
+	</fail>
+
+	<!-- importing a master frontend build file -->
+	<import file="${cafrontend.sourcedir}/build-core.xml" as="ca_frontend-core"/>
+	
+	<path id="apiltaClasspath">
+		<path refid="classpath"/>
+		<!-- Include application specific libraries -->
+		<fileset dir="lib">
+			<include name="*.jar"/>
+		</fileset>
+    </path>
+	
+	<target name="prepare-apilta-build" description="Make sure that the required directories exist for the building process" 
+		extensionOf="ca_frontend-core.ready-to-build" depends="prepare">
+        <echo message="Creating additional directories to ${app.name}'s war directory ..."/>
+        <mkdir dir="${build}"/>
+		<mkdir dir="${build}/classes-apilta"/>
+    </target>
+	
+	<target name="build-apilta" description="Builds apilta files" 
+		extensionOf="ca_frontend-core.build" depends="prepare-apilta-build, build-core">
+		<echo message="Building and Jarring '${apilta.project.name}' service files..."/>
+		<javac srcdir="src"
+			destdir="${build}/classes-apilta"
+			classpath="${dist}/${distCoreJarName}"
+			classpathref="apiltaClasspath">
+        </javac>
+		<jar jarfile="${dist}/${distJarName}">
+    		<fileset dir="${build}/classes-apilta" includes="**"/>
+        </jar>
+    </target>
+	
+	<target name="package-apilta-files" description="Include apilta files to the package" 
+		extensionOf="ca_frontend-core.ready-to-package" depends="build">
+		
+		<!-- copy additional configuration files -->
+		
+		<!-- these files apply to all flavors -->
+		<echo>Copy configuration files from ${basedir}/conf</echo>
+		<copy todir="${build}/${app.name}/WEB-INF"
+			preservelastmodified="true"
+			overwrite="true">
+			<fileset dir="conf">
+				<include name="*.xml"/>
+				<include name="*.properties"/>
+				<exclude name="*.apilta.testing*"/>
+				<exclude name="*.apilta.production*"/>
+			</fileset>
+		</copy>
+		
+		<!-- copy additional libraries -->
+		<echo>Copy libraries from ${basedir}/lib</echo>
+		<copy todir="${build}/${app.name}/WEB-INF/lib"
+			preservelastmodified="true"
+			overwrite="true">
+			<fileset dir="${dist}">
+				<include name="${distJarName}"/>
+			</fileset>
+			<fileset dir="lib">
+				<include name="*.jar"/>
+			</fileset>
+		</copy>
+	</target>
+	
+</project>
