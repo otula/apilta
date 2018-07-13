@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response method="getMeasurements" service="sensors">
+	<task>
+		<taskIdList>
+			<taskId>1</taskId>
+		</taskIdList>
+		<measurementList>
+			<measurement>
+				<measurementId>47812093</measurementId>
+				<backendId>1</backendId>
+				<dataPointList>
+					<dataPoint>
+						<created>2016-12-08T09:22:32+02:00</created>
+						<description>Linja-auto #33/Front camera</description>
+						<key>file/url</key>
+						<value>http://example.org/pysakki1.jpg</value>
+						<dataPointId>d8ddc1f6-bd27-11e6-aa7a-5cf9dd76ff47</dataPointId>
+					</dataPoint>
+					<dataPoint>
+						<created>2016-12-08T09:22:33+02:00</created>
+						<description>Linja-auto #33/Front camera</description>
+						<key>file/url</key>
+						<value>http://example.org/pysakki2.jpg</value>
+						<dataPointId>147c0db2-bd28-11e6-9cb7-5cf9dd76ff47</dataPointId>
+					</dataPoint>
+					<dataPoint>
+						<created>2016-12-08T09:22:34+02:00</created>
+						<description>Linja-auto #33/Front camera</description>
+						<key>file/url</key>
+						<value>http://example.org/pysakki3.jpg</value>
+						<dataPointId>15022d16-bd28-11e6-bdee-5cf9dd76ff47</dataPointId>
+					</dataPoint>
+					<dataPoint>
+						<created>2016-12-08T09:22:32+02:00</created>
+						<description>Linja-auto #33/Location</description>
+						<key>sensor/location</key>
+						<value>61.3818,21.6664</value>
+						<dataPointId>40f5018c-bd28-11e6-a333-5cf9dd76ff47</dataPointId>
+					</dataPoint>
+				</dataPointList>
+			</measurement>
+			<measurement>
+				<measurementId>4474925535404906914</measurementId>
+				<backendId>1</backendId>
+				<dataPointList>
+					<dataPoint>
+						<created>2016-08-03T21:42:57.360+03:00</created>
+						<description>Linja-auto #33/Front camera</description>
+						<key>file/url</key>
+						<value>http://example.org/front.jpg</value>
+						<dataPointId>d91dd6d7-f4b1-459a-9768-688b9d5c79c1</dataPointId>
+					</dataPoint>
+					<dataPoint>
+						<created>2016-08-03T21:42:59.360+03:00</created>
+						<description>Linja-auto #33/Front camera</description>
+						<key>file/url</key>
+						<value>http://example.org/front2.jpg</value>
+						<dataPointId>9c25f11a-b878-11e6-8edf-5cf9dd76ff47</dataPointId>
+					</dataPoint>
+					<dataPoint>
+						<created>2016-08-03T21:43:05.360+03:00</created>
+						<description>Linja-auto #33/Front camera</description>
+						<key>file/url</key>
+						<value>http://example.org/front3.jpg</value>
+						<dataPointId>9c25f11a-b878-11e6-8edf-5cf9dd76ff47</dataPointId>
+					</dataPoint>
+					<dataPoint>
+						<created>2016-07-26T04:09:08.360+03:00</created>
+						<description>Linja-auto #33/Front camera</description>
+						<key>file/url</key>
+						<value>http://example.org/front4.jpg</value>
+						<dataPointId>61a39038-dcde-4804-88b6-78bd3459087e</dataPointId>
+					</dataPoint>
+					<dataPoint>
+						<created>2016-01-10T19:01:32.360+02:00</created>
+						<description>Linja-auto #33/Location</description>
+						<key>sensor/location</key>
+						<value>60.23,20.1</value>
+						<dataPointId>5d1a1a9a-a59c-4e76-8a01-0c88226a28fd</dataPointId>
+					</dataPoint>
+				</dataPointList>
+			</measurement>
+			<measurement>
+				<measurementId>7197144160008676614</measurementId>
+				<backendId>1</backendId>
+				<dataPointList>
+					<dataPoint>
+						<created>2016-07-26T04:09:08.360+03:00</created>
+						<description>Linja-auto #33/Front camera</description>
+						<key>file/url</key>
+						<value>http://example.org/front5.jpg</value>
+						<dataPointId>51a39038-dcde-4804-88b6-78bd3459087e</dataPointId>
+					</dataPoint>
+				</dataPointList>
+			</measurement>
+			<measurement>
+				<measurementId>5249966350339822753</measurementId>
+				<backendId>2</backendId>
+				<dataPointList>
+					<dataPoint>
+						<created>2016-07-26T04:09:08.360+03:00</created>
+						<description>Linja-auto #9/Vehicle velocity</description>
+						<key>sensor/velocity</key>
+						<value>83.4</value>
+						<dataPointId>31a39038-dcde-4804-88b6-78bd3459087e</dataPointId>
+					</dataPoint>
+					<dataPoint>
+						<created>2016-02-05T16:16:32.360+02:00</created>
+						<description>Linja-auto #9/Location</description>
+						<key>sensor/location</key>
+						<value>60.23,20.2</value>
+						<dataPointId>78feb07a-157a-466b-aefb-89376347602b</dataPointId>
+					</dataPoint>
+				</dataPointList>
+			</measurement>
+		</measurementList>
+	</task>
+    <status>OK</status>
+</response>

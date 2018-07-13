@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response method="getBackends" service="backends">
+    <backendList>
+		<backend>
+			<url>example.org</url>
+			<backendId>1</backendId>
+			<capabilityList>
+				<capability>camera</capability>
+				<capability>location</capability>
+			</capabilityList>
+			<description>XYZ-123</description>
+			<enabled>true</enabled>
+			<name>Linja-auto #33</name>
+			
+			<message>Hello</message>
+			<taskStatus>STARTED</taskStatus>
+		</backend>
+		<backend>
+			<url>example.org</url>
+			<backendId>2</backendId>
+			<capabilityList>
+				<capability>camera</capability>
+				<capability>location</capability>
+				<capability>velocity</capability>
+			</capabilityList>
+			<description>ABC-007</description>
+			<enabled>true</enabled>
+			<name>Linja-auto #9</name>
+			
+			<message>Hello!</message>
+			<taskStatus>FINISHED</taskStatus>
+		</backend>
+	</backendList>
+    <status>OK</status>
+</response>

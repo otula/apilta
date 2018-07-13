@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />	<!-- http://www.viaboxxsystems.de/html-fullscreen-apps-for-the-ipad -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /> <!-- http://www.viaboxxsystems.de/html-fullscreen-apps-for-the-ipad -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- http://getbootstrap.com/getting-started/ -->
+	<title>APILTA Test page</title>
+	<!-- Bootstrap core CSS -->
+    <link href="scripts/lib/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link rel="stylesheet" href="styles/main.css" type="text/css" />
+	
+	<!-- data-main attribute tells require.js to load 'scripts/main.js' after require.js loads. -->
+	<script data-main="scripts/main" data-requirecontext="public" src="scripts/lib/require.js"></script>
+</head>
+<body>
+
+	<div class="sidebar-nav" id="sidebar-black">
+	  <nav class="navbar navbar-default" id="navbar-black" role="navigation">
+	    <div class="navbar-header">
+	      <button class="navbar-toggle" type="button" data-target=".sidebar-navbar-collapse" data-toggle="collapse">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <span class="visible-xs"><a class="navbar-brand" href="#">APILTA</a></span>
+	    </div>
+	    
+	    <div class="navbar-collapse collapse sidebar-navbar-collapse">
+	    
+	      <ul class="nav navbar-nav">
+	      	<li class="hidden-xs"><a class="navbar-brand" href="#/">APILTA</a></li>
+	        <li class="dropdown open">
+	        <a href="#navigation">
+	        	<i class="glyphicon glyphicon glyphicon-th"></i>
+	        	<span class="i18n-navigation">Navigation</span>
+	        	<b class="caret"></b>
+	        </a>
+	          <ul class="dropdown-menu">
+	            <li><a href="#/"><i class="glyphicon glyphicon-home"></i><span class="i18n-home">Home</span></a></li>
+	            <li><a href="#/tasks"><i class="glyphicon glyphicon-tasks"></i><span class="i18n-tasks">Tasks</span></a></li>
+	            <li><a href="#/backends"><i class="glyphicon glyphicon-cloud"></i><span class="i18n-back-ends">Back Ends</span></a></li>
+				<li><a href="#/results"><i class="glyphicon glyphicon-dashboard"></i><span class="i18n-results">Results</span></a></li>
+				<li><a href="#/settings"><i class="glyphicon glyphicon-cog"></i><span class="i18n-settings">Settings</span></a></li>
+	          </ul>
+	        </li>
+	        
+	        <li class="dropdown">
+	          <a class="dropdown-toggle" href="#about-menu" data-toggle="dropdown">
+	          	<i class="glyphicon glyphicon-info-sign"></i>
+	          	<span class="i18n-about">About</span>
+	          	<b class="caret"></b>
+	          </a>
+	          <ul class="dropdown-menu">
+	            <li><a href="#/info/about"><i class="glyphicon glyphicon-info-sign"></i><span class="i18n-about">About</span></a></li>
+	            <li><a href="#/info/contact"><i class="glyphicon glyphicon-envelope"></i><span class="i18n-contact">Contact</span></a></li>
+	            <li><a href="#/info/privacy"><i class="glyphicon glyphicon-exclamation-sign"></i><span class="i18n-privacy">Privacy policy</span></a></li>
+	          </ul>
+	        </li>
+	      </ul>
+	    </div><!--/.nav-collapse -->
+	  </nav><!--/.navbar -->
+	</div><!--/.sidebar-nav -->
+  
+    <div id="page-content-wrapper" class="container-fluid">
+		<div id="main-content">
+			<ol id="breadcrumbs" class="breadcrumb"></ol>
+			<div id="page-content"></div>
+		</div>
+    </div><!-- /.container -->
+	
+	<footer class="site-footer">
+		<p>APILTA</p>
+		<p>
+			<a href="#"><span class="i18n-to-top">Back to top</span></a>
+		</p>
+	</footer>
+</body>
+</html>

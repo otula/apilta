@@ -1,0 +1,238 @@
+/**
+ * Copyright 2015-2016 Tampere University of Technology, Pori Department
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* ELEMENTS */
+html{
+	position: relative;
+	min-height: 100%;
+}
+body{
+	/* Margin bottom by footer height */
+	margin-bottom: 80px;
+}
+
+.form-group.required label::after{
+	content: "*";
+	margin-left: 0.25em;
+	color: #d00;
+	font-family: 'Glyphicons Halflings';
+	font-weight: normal;
+	font-size: 0.5em;
+	vertical-align: super;
+}
+
+.form-group.required label>*:last-child{
+	float: left;
+}
+
+/* CLASSES */
+.breadcrumb{
+	margin-bottom: 0px;
+}
+
+i.glyphicon{
+	margin-right: 0.5em;
+}
+
+.glyphicon.no-margin{
+	margin-right: 0em;
+}
+
+.preformatted{
+	white-space: pre-wrap;
+}
+
+/* IDs */
+
+
+/*
+ * Sticky Footer
+ */
+.site-footer {
+  position: absolute;
+  bottom: 0px;
+  /* Set the fixed height of the footer here */
+  height: 80px;
+  width: 100%;
+  padding: 20px 0px;
+  color: #999;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-top: 1px solid #e5e5e5;
+}
+.site-footer p:last-child {
+  margin-bottom: 0;
+}
+@media (min-width: 768px) {
+	.site-footer{
+		left: 250px;
+		right: 0px;
+		width: auto;
+	}
+}
+
+/*
+ * Sidebar/Navbar
+ */
+.sidebar-form {
+  padding: 7px 15px 13px 15px;
+}
+@media (min-width: 768px) {
+  #page-content-wrapper, #site-footer {
+    margin: 0 0 0 255px;
+  }
+  .sidebar-nav {
+	left: 0;
+    list-style: none;
+    height: 100%;
+    margin: 0;
+    overflow-y: auto;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    width: 250px;
+    z-index: 1;
+  } 
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+  }
+  .sidebar-nav .navbar ul {
+    float: none;
+  }
+  .sidebar-nav .navbar ul:not {
+    display: block;
+  }
+  .sidebar-nav .navbar li {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li a {
+    /*padding-top: 12px;*/
+    padding-bottom: 12px;
+  }
+  .sidebar-nav .open .dropdown-menu {
+    position: static;
+    float: none;
+    width: auto;
+    margin: 0;
+    padding: 5px 0;
+    background-color: transparent;
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+  .sidebar-nav .open .dropdown-menu > li > a {
+    padding: 5px 15px 5px 25px;
+  }
+  .sidebar-nav .navbar-brand {
+    width: 100%;
+	height: 50px;
+  }
+  .sidebar-nav .open > a > b.caret {
+    border-top: none;
+    border-bottom: 4px solid;
+  }
+}
+/*
+ * Black navbar style
+ */
+#navbar-black.navbar-default { /* #3C3C3C - #222222 */
+    font-size: 14px;
+    background-color: rgba(34, 34, 34, 1);
+    background: -webkit-linear-gradient(top, rgba(60, 60, 60, 1) 0%, rgba(34, 34, 34, 1) 100%);
+    background: linear-gradient(to bottom, rgba(60, 60, 60, 1) 0%, rgba(34, 34, 34, 1) 100%);
+    border: 0px;
+	border-radius: 0;
+}
+#navbar-black.navbar-default .navbar-nav>li.dropdown.open>a,
+#navbar-black.navbar-default .navbar-nav>li>a:hover,
+#navbar-black.navbar-default .navbar-nav>li>a:focus,
+#navbar-black.navbar-default .navbar-nav>li>ul>li>a:hover, 
+#navbar-black.navbar-default .navbar-nav>li>ul>li>a:focus, 
+#navbar-black.navbar-default .navbar-nav>.active>a,
+#navbar-black.navbar-default .navbar-nav>.active>a:hover,
+#navbar-black.navbar-default .navbar-nav>.active>a:focus,
+#navbar-black.navbar-default .form-group:hover > label {   
+	color: rgba(255, 255, 255, 1);
+    background-color: rgba(0, 0, 0, 1);
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 100%);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 100%);
+}
+#sidebar-black, #column-black {
+  	background-color: #222222;
+}
+#navbar-black.navbar-default .navbar-toggle {
+    border-color: #222222; 
+}
+#navbar-black.navbar-default .navbar-toggle:hover,
+#navbar-black.navbar-default .navbar-toggle:focus {
+    background-color: #3C3C3C;
+}
+#navbar-black.navbar-default .navbar-nav>li>a,
+#navbar-black.navbar-default .navbar-nav>li>ul>li>a, 
+#navbar-black.navbar-default .navbar-brand,
+#navbar-black.navbar-default .form-group {
+    color: #999999; 
+}
+#navbar-black.navbar-default .navbar-toggle .icon-bar,
+#navbar-black.navbar-default .navbar-toggle:hover .icon-bar,
+#navbar-black.navbar-default .navbar-toggle:focus .icon-bar {
+    background-color: #ffffff;
+}
+.nav.open>a{
+	background-color: "black";
+}
+li.hidden-xs{
+	height: 50px;
+}
+.navbar-collapse.sidebar-navbar-collapse{
+	border-top: 0px;
+}
+
+/** Tabulator.js Wrap Column Header Title Text */
+.tabulator .tabulator-header .tabulator-col,
+.tabulator .tabulator-header .tabulator-col-row-handle {
+    white-space: normal !important;
+}
+
+.tabulator-header .extra-header{
+	padding: 4px;
+}
+
+
+/** Bootstrap carousel */
+.carousel {
+	height: 480px;
+	width: 100%;
+	overflow: hidden;
+}
+.carousel-inner{
+	height: 100%;
+}
+.item{
+	height: 100%;
+}
+.item .image{
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 100%;
+}
+.carousel-caption{
+	background-color: rgba(32,32,32, 0.5);
+	border-radius: 15px;
+}

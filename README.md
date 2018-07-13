@@ -69,7 +69,7 @@ ShockDemo1 and ShockDemo2
 - Service end-point is in apilta_service (SensorsService/ClientService, https://otula.github.io/projektit/apilta-api/service/tut/pori/apilta/sensors/reference/package-summary.html)
 
 
-Trafficker
+TaskManager
 - TBA
 
 

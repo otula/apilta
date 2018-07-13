@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response method="getTasks" service="tasks">
+    <taskList>
+		<task>
+			<description>Tehtävässä linja-autoihin asennetut päätelaitteet ottavat kuvia määriteltyjä pysäkkejä lähestyttäessä.</description>
+			<name>Bussipysäkkiseuranta</name>
+			<taskIdList>
+				<taskId>1</taskId>
+			</taskIdList>
+			<updatedTimestamp>2016-10-10T10:10:10+0000</updatedTimestamp>
+			<userDetails>
+				<userId>1</userId>
+			</userDetails>
+		</task>
+	</taskList>
+    <status>OK</status>
+</response>
