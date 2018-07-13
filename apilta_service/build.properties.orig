@@ -11,4 +11,5 @@ username=admin
 password=password
 
 #Path to the source directory where main source tree & build.xml is
-cafrontend.sourcedir=/path/to/main/source/tree
+#for example, cafrontend.sourcedir=/path/to/main/source/tree
+cafrontend.sourcedir=../ca_frontend
