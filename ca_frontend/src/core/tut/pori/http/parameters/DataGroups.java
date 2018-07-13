@@ -15,6 +15,7 @@
  */
 package core.tut.pori.http.parameters;
 
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -301,5 +302,10 @@ public final class DataGroups extends HTTPParameter {
 	@Override
 	public String getValue() {
 		return toDataGroupString();
+	}
+	
+	@Override
+	public void initialize(InputStream parameterValue) throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("The use of HTTP Body is not implemented for this parameter.");
 	}
 }

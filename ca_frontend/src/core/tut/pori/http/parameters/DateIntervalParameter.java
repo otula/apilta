@@ -15,6 +15,7 @@
  */
 package core.tut.pori.http.parameters;
 
+import java.io.InputStream;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -114,6 +115,11 @@ public class DateIntervalParameter extends HTTPParameter {
 	 */
 	public Set<Interval> getValues() {
 		return (hasValues() ? _intervals : null);
+	}
+	
+	@Override
+	public void initialize(InputStream parameterValue) throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("The use of HTTP Body is not implemented for this parameter.");
 	}
 	
 	/**

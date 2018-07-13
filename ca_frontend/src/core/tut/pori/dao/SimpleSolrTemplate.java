@@ -16,9 +16,7 @@
 package core.tut.pori.dao;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -27,8 +25,6 @@ import org.apache.solr.client.solrj.SolrRequest.METHOD;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.client.solrj.response.UpdateResponse;
-import org.apache.solr.common.SolrDocument;
-import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrException;
 import org.apache.solr.common.SolrException.ErrorCode;
 import org.apache.solr.common.params.SolrParams;
@@ -137,59 +133,6 @@ public class SimpleSolrTemplate{
 			LOGGER.error(ex, ex);
 			throw new SolrException(ErrorCode.UNKNOWN, "Query Failed.");
 		}
-	}
-	
-	/**
-	 * 
-	 * @param params
-	 * @param fieldName
-	 * @param cls
-	 * @return All values for the given field or null if none
-	 * @throws SolrException
-	 */
-	public <T> List<T> queryForObjects(SolrParams params, String fieldName, Class<T> cls) throws SolrException{
-		try {
-			return getObjects(_server.query(params, METHOD.POST), fieldName, cls);
-		} catch (SolrServerException | IllegalArgumentException | IOException ex) {
-			LOGGER.error(ex, ex);
-			throw new SolrException(ErrorCode.UNKNOWN, "Query failed.");
-		}
-	}
-	
-	/**
-	 * 
-	 * @param response
-	 * @param fieldName
-	 * @param cls
-	 * @return All values for the given field or null if none
-	 * @throws IllegalArgumentException
-	 */
-	@SuppressWarnings("unchecked")
-	public static <T> List<T> getObjects(QueryResponse response, String fieldName, Class<T> cls) throws IllegalArgumentException{
-		if(response == null){
-			LOGGER.debug("Null response.");
-			return null;
-		}
-		if(fieldName == null){
-			throw new IllegalArgumentException("Field name was null.");
-		}
-		SolrDocumentList list = response.getResults();
-		if(list.isEmpty()){
-			LOGGER.debug("No documents.");
-			return null;
-		}
-		
-		List<T> results = new ArrayList<>(list.size());
-		for(Iterator<SolrDocument> iter = list.iterator(); iter.hasNext();){
-			Object o = iter.next().getFieldValue(fieldName);
-			if(o == null){
-				LOGGER.debug("Ignored null value for field: "+fieldName);
-			}else{
-				results.add((T) o); // ignore type-safety, the objects returned SHOULD be simple objects (not arrays or complex types), and even if they aren't the user should not pass invalid object class
-			}
-		}
-		
-		return (results.isEmpty() ? null : results);
 	}
 	
 	/**

@@ -34,6 +34,7 @@ import core.tut.pori.http.parameters.DataGroups;
 import core.tut.pori.http.parameters.InputStreamParameter;
 import core.tut.pori.http.parameters.Limits;
 import core.tut.pori.http.parameters.LongParameter;
+import core.tut.pori.http.parameters.StringParameter;
 import core.tut.pori.utils.XMLFormatter;
 
 /**
@@ -112,12 +113,12 @@ public class ServerService {
 	public Response queryTaskDetails(
 			@HTTPAuthenticationParameter(required = false) AuthenticationParameter authenticatedUser,
 			@HTTPMethodParameter(name = service.tut.pori.tasks.Definitions.PARAMETER_BACKEND_ID) LongParameter backendId,
-			@HTTPMethodParameter(name = service.tut.pori.tasks.Definitions.PARAMETER_TASK_ID) LongParameter taskId,
+			@HTTPMethodParameter(name = service.tut.pori.tasks.Definitions.PARAMETER_TASK_ID) StringParameter taskId,
 			@HTTPMethodParameter(name = DataGroups.PARAMETER_DEFAULT_NAME, required = false) DataGroups dataGroups,
 			@HTTPMethodParameter(name = Limits.PARAMETER_DEFAULT_NAME, required = false) Limits limits
 			) 
 	{
-		return new Response(SensorsReferenceCore.generateTaskDetails(authenticatedUser.getUserIdentity(), backendId.getValue(), dataGroups, limits, service.tut.pori.apilta.sensors.Definitions.TASK_TYPE_DATA_COLLECT)); // we can simply return pseudo randomly generated task details with hard-coded task type
+		return new Response(SensorsReferenceCore.queryTaskDetails(authenticatedUser.getUserIdentity(), backendId.getValue(), dataGroups, limits, taskId.getValues(), service.tut.pori.apilta.sensors.Definitions.TASK_TYPE_DATA_COLLECT)); // we can simply return pseudo randomly generated task details with hard-coded task type
 	}
 	
 	/**

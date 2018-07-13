@@ -112,12 +112,12 @@ public class AlertService {
 	 */
 	@HTTPServiceMethod(name = service.tut.pori.apilta.alerts.Definitions.METHOD_CREATE_FILE, acceptedMethods={core.tut.pori.http.Definitions.METHOD_POST})
 	public Response createFile (
-			@HTTPAuthenticationParameter AuthenticationParameter authenticatedUser,
+			@SuppressWarnings("unused") @HTTPAuthenticationParameter AuthenticationParameter authenticatedUser,
 			@HTTPMethodParameter(name = InputStreamParameter.PARAMETER_DEFAULT_NAME, bodyParameter = true) InputStreamParameter file
 			) 
 	{
 		FileDetailsList list = new FileDetailsList();
-		list.addFile(AlertsCore.createFile(authenticatedUser.getUserIdentity(), file.getValue()));
+		list.addFile(AlertsCore.createFile(file.getValue()));
 		return new Response(list);
 	}
 }

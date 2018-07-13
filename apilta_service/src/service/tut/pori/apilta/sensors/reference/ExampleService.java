@@ -15,8 +15,6 @@
  */
 package service.tut.pori.apilta.sensors.reference;
 
-import org.apache.commons.lang3.StringUtils;
-
 import core.tut.pori.http.Response;
 import core.tut.pori.http.annotations.HTTPMethodParameter;
 import core.tut.pori.http.annotations.HTTPService;
@@ -50,43 +48,38 @@ public class ExampleService {
 	
 	/**
 	 * Generates example task details
+	 * @param taskId 
 	 * 
-	 * @param dataGroups
-	 * @param limits paging limits
 	 * @param taskType Will default to {@link service.tut.pori.apilta.sensors.Definitions#TASK_TYPE_DATA_COLLECT}, if missing
 	 * @return task details
 	 * @see service.tut.pori.apilta.sensors.datatypes.SensorTask
-	 * @see #taskDetails(DataGroups, Limits, StringParameter)
+	 * @see #taskDetails(StringParameter, StringParameter)
 	 */
 	@HTTPServiceMethod(name = service.tut.pori.tasks.Definitions.ELEMENT_TASK)
 	public Response task(
-			@HTTPMethodParameter(name = DataGroups.PARAMETER_DEFAULT_NAME, required=false) DataGroups dataGroups,
-			@HTTPMethodParameter(name = Limits.PARAMETER_DEFAULT_NAME, required=false, defaultValue="0-0") Limits limits,
+			@HTTPMethodParameter(name = service.tut.pori.tasks.Definitions.PARAMETER_TASK_ID, required=false) StringParameter taskId,
 			@HTTPMethodParameter(name = Definitions.PARAMETER_TASK_TYPE, required=false) StringParameter taskType
 			) 
 	{
-		return taskDetails(dataGroups, limits, taskType);
+		return taskDetails(taskId, taskType);
 	}
 	
 	/**
 	 * Generates example task details
 	 * 
-	 * @param dataGroups
-	 * @param limits paging limits
+	 * @param taskId 
 	 * @param taskType Will default to {@link service.tut.pori.apilta.sensors.Definitions#TASK_TYPE_DATA_COLLECT}, if missing
 	 * @return task details
 	 * @see service.tut.pori.apilta.sensors.datatypes.SensorTask
 	 */
 	@HTTPServiceMethod(name = Definitions.METHOD_TASK_DETAILS)
 	public Response taskDetails(
-			@HTTPMethodParameter(name = DataGroups.PARAMETER_DEFAULT_NAME, required=false) DataGroups dataGroups,
-			@HTTPMethodParameter(name = Limits.PARAMETER_DEFAULT_NAME, required=false, defaultValue="0-0") Limits limits,
+			@HTTPMethodParameter(name = service.tut.pori.tasks.Definitions.PARAMETER_TASK_ID, required=false) StringParameter taskId,
 			@HTTPMethodParameter(name = Definitions.PARAMETER_TASK_TYPE, required=false) StringParameter taskType
 			) 
 	{
 		Example example = new Example();
-		String type = taskType.getValue();
-		example.setTask(SensorsReferenceCore.generateTaskDetails(null, null, dataGroups, limits, (StringUtils.isBlank(type) ? service.tut.pori.apilta.sensors.Definitions.TASK_TYPE_DATA_COLLECT : type)));
+		example.setTask(SensorsReferenceCore.generateTaskDetails(null, null, (taskId.hasValues() ? taskId.getValues() : null), (taskType.hasValues() ? taskId.getValue() : service.tut.pori.apilta.sensors.Definitions.TASK_TYPE_DATA_COLLECT)));
 		return new Response(example);
 	}
 	
@@ -95,6 +88,7 @@ public class ExampleService {
 	 * 
 	 * @param dataGroups
 	 * @param limits paging limits
+	 * @param taskId 
 	 * @param taskType Will default to {@link service.tut.pori.apilta.sensors.Definitions#TASK_TYPE_DATA_COLLECT}, if missing
 	 * @return task details
 	 * @see service.tut.pori.apilta.sensors.datatypes.SensorTask
@@ -103,11 +97,12 @@ public class ExampleService {
 	public Response taskResults(
 			@HTTPMethodParameter(name = DataGroups.PARAMETER_DEFAULT_NAME, required=false) DataGroups dataGroups,
 			@HTTPMethodParameter(name = Limits.PARAMETER_DEFAULT_NAME, required=false, defaultValue="0-0") Limits limits,
+			@HTTPMethodParameter(name = service.tut.pori.tasks.Definitions.PARAMETER_TASK_ID, required=false) StringParameter taskId,
 			@HTTPMethodParameter(name = Definitions.PARAMETER_TASK_TYPE, required=false, defaultValue=service.tut.pori.apilta.sensors.Definitions.TASK_TYPE_DATA_COLLECT) StringParameter taskType
 			) 
 	{
 		Example example = new Example();
-		example.setTask(SensorsReferenceCore.generateTaskResults(null, dataGroups, limits, taskType.getValue()));
+		example.setTask(SensorsReferenceCore.generateTaskResults(null, dataGroups, limits, taskId.getValue(), taskType.getValue()));
 		return new Response(example);
 	}
 }

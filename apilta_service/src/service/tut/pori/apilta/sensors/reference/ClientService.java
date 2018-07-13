@@ -166,7 +166,7 @@ public class ClientService {
 	@HTTPServiceMethod(name = service.tut.pori.apilta.sensors.Definitions.METHOD_GET_MEASUREMENTS, acceptedMethods={core.tut.pori.http.Definitions.METHOD_GET})
 	public Response getMeasurements(
 			@HTTPAuthenticationParameter(required = false) AuthenticationParameter authenticatedUser,
-			@HTTPMethodParameter(name = service.tut.pori.tasks.Definitions.PARAMETER_TASK_ID) LongParameter taskId,
+			@HTTPMethodParameter(name = service.tut.pori.tasks.Definitions.PARAMETER_TASK_ID) StringParameter taskId,
 			@HTTPMethodParameter(name = service.tut.pori.tasks.Definitions.PARAMETER_BACKEND_ID, required = false) LongParameter backendIdFilter,
 			@HTTPMethodParameter(name = service.tut.pori.tasks.Definitions.PARAMETER_CREATED, required = false) DateIntervalParameter createdFilter,
 			@HTTPMethodParameter(name = DataGroups.PARAMETER_DEFAULT_NAME, required = false) DataGroups dataGroups,
@@ -174,6 +174,6 @@ public class ClientService {
 			@HTTPMethodParameter(name = service.tut.pori.apilta.sensors.Definitions.PARAMETER_MEASUREMENT_ID, required = false) StringParameter measurementIdFilter
 			)
 	{
-		return new Response(SensorsReferenceCore.getMeasurements(authenticatedUser.getUserIdentity(), backendIdFilter.getValues(), createdFilter.getValues(), dataGroups, limits, measurementIdFilter.getValues()));
+		return new Response(SensorsReferenceCore.getMeasurements(authenticatedUser.getUserIdentity(), backendIdFilter.getValues(), createdFilter.getValues(), dataGroups, limits, measurementIdFilter.getValues(), taskId.getValues()));
 	}
 }

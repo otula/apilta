@@ -1,5 +1,6 @@
 package service.tut.pori.apilta.shock.datatypes;
 
+import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
 
@@ -88,6 +89,11 @@ public class LocationLimits extends HTTPParameter {
 	 */
 	public LatLng getUpperRight() {
 		return _upperRight;
+	}
+	
+	@Override
+	public void initialize(InputStream parameterValue) throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("The use of HTTP Body is not implemented for this parameter.");
 	}
 	
 	/**

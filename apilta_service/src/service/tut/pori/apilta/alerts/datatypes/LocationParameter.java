@@ -15,6 +15,7 @@
  */
 package service.tut.pori.apilta.alerts.datatypes;
 
+import java.io.InputStream;
 import java.util.List;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -139,5 +140,10 @@ public class LocationParameter extends HTTPParameter {
 	@Override
 	public Location getValue() {
 		return _location;
+	}
+	
+	@Override
+	public void initialize(InputStream parameterValue) throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("The use of HTTP Body is not implemented for this parameter.");
 	}
 }

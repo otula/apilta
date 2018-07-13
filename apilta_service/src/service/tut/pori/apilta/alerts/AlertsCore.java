@@ -144,18 +144,16 @@ public final class AlertsCore {
 			alert.setValidUntil(new Date(created.getTime()+ServiceInitializer.getPropertyHandler().getSystemProperties(ApiltaProperties.class).getAlertValidityTime()*60000));
 		}
 		
-		return ServiceInitializer.getDAOHandler().getDAO(AlertsDAO.class).addAlert(alert, validGroupIds); // use valid group ids list to remove possible duplicates in the id list
-		
+		return ServiceInitializer.getDAOHandler().getDAO(AlertsDAO.class).addAlert(alert, validGroupIds); // use valid group ids list to remove possible duplicates in the id list	
 	}
 
 	/**
 	 * 
-	 * @param authenticatedUser
 	 * @param file
 	 * @return details for the created file or null on failure (permission denied)
 	 * @throws IllegalArgumentException on bad data
 	 */
-	public static FileDetails createFile(UserIdentity authenticatedUser, InputStream file) throws IllegalArgumentException {
+	public static FileDetails createFile(InputStream file) throws IllegalArgumentException {
 		FileDetails details = FilesCore.createFile(file);
 		if(!FileDetails.isValid(details)){
 			throw new IllegalArgumentException("Failed to create file from the given data.");

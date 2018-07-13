@@ -17,6 +17,7 @@ package service.tut.pori.apilta.sensors.reference;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -56,6 +57,8 @@ import service.tut.pori.tasks.datatypes.TaskBackend.Status;
  */
 public class SensorsXMLObjectCreator {
 	private static final Logger LOGGER = Logger.getLogger(SensorsXMLObjectCreator.class);
+	private static final int MAX_CONDITIONS = 5;
+	private static final int MAX_OUTPUTS = 5;
 	private static final int TEXT_LENGTH = 64;
 	private Random _random = null;
 	private RandomStringGenerator _stringGenerator = null;
@@ -139,15 +142,14 @@ public class SensorsXMLObjectCreator {
 	/**
 	 * 
 	 * @param backendId
-	 * @param dataGroups
-	 * @param limits
+	 * @param taskIds 
 	 * @param taskType
 	 * @return pseudo randomly generated task details
 	 * @throws IllegalArgumentException on invalid arguments
 	 */
-	public SensorTask generateTaskDetails(Long backendId, DataGroups dataGroups, Limits limits, String taskType) throws IllegalArgumentException {
-		SensorTask task = (SensorTask) setTaskDetails(new SensorTask(), backendId, taskType);
-		setSensorTaskDetails(limits, task);
+	public SensorTask generateTaskDetails(Long backendId, Collection<String> taskIds, String taskType) throws IllegalArgumentException {
+		SensorTask task = (SensorTask) setTaskDetails(new SensorTask(), backendId, taskIds, taskType);
+		setSensorTaskDetails(task);
 		
 		return task;
 	}
@@ -157,13 +159,14 @@ public class SensorsXMLObjectCreator {
 	 * @param backendId 
 	 * @param dataGroups
 	 * @param limits
+	 * @param taskIds 
 	 * @param taskType
 	 * @return pseudo randomly generated task results
 	 * @throws IllegalArgumentException on invalid arguments
 	 */
-	public SensorTask generateTaskResults(Long backendId, DataGroups dataGroups, Limits limits, String taskType) throws IllegalArgumentException
+	public SensorTask generateTaskResults(Long backendId, DataGroups dataGroups, Limits limits, Collection<String> taskIds, String taskType) throws IllegalArgumentException
 	{
-		SensorTask task = (SensorTask) setTaskDetails(new SensorTask(), _random.nextLong(), taskType);
+		SensorTask task = (SensorTask) setTaskDetails(new SensorTask(), _random.nextLong(), taskIds, taskType);
 		//erase a few non-needed members for this case
 		List<TaskBackend> backends = task.getBackends();
 		backends.clear();
@@ -263,10 +266,11 @@ public class SensorsXMLObjectCreator {
 	 * 
 	 * @param task
 	 * @param backendId
+	 * @param taskIds optional task identifiers (if null or empty, one id will be randomly generated)
 	 * @param taskType
 	 * @return the populated base class task
 	 */
-	public Task setTaskDetails(Task task, long backendId, String taskType){
+	public Task setTaskDetails(Task task, long backendId, Collection<String> taskIds, String taskType){
 		if(task == null){
 			return null;
 		}
@@ -278,7 +282,14 @@ public class SensorsXMLObjectCreator {
 		task.setBackends(backends);
 		
 		task.setCreated(new Date(System.currentTimeMillis() - Math.abs(_random.nextLong() % 31536000000L)));
-		task.addTaskId(UUID.randomUUID().toString());
+		if(taskIds == null || taskIds.isEmpty()) {
+			task.addTaskId(UUID.randomUUID().toString());
+		}else {
+			for(String taskId : taskIds) {
+				task.addTaskId(taskId);
+			}
+		}
+		
 		HashSet<String> taskTypes = new HashSet<>(1);
 		if(StringUtils.isEmpty(taskType)){
 			taskTypes.add(_stringGenerator.generate(TEXT_LENGTH));
@@ -329,40 +340,30 @@ public class SensorsXMLObjectCreator {
 	}
 	
 	/**
-	 * @param limits 
 	 * @param task
 	 * @return return populated sensor task
 	 */
-	public Task setSensorTaskDetails(Limits limits, SensorTask task){
+	public Task setSensorTaskDetails(SensorTask task){
 		List<Output> outputs = new ArrayList<>();
-		for(int i=0; i<_random.nextInt(4)+1; ++i){
+		for(int i=-1, count=_random.nextInt(MAX_OUTPUTS); i<count; ++i){
 			Output output = new Output();
 			output.setFeature(_stringGenerator.generate(5));
 			outputs.add(output);
 		}
 		task.setOutput(outputs);
 		
-		task.setConditions(createConditionList(limits));
+		task.setConditions(createConditionList());
 		return task;
 	}
 	
 	/**
 	 * 
-	 * @param limits
 	 * @return list of generated random conditions
 	 */
-	public List<Condition> createConditionList(Limits limits){
-		int count = limits.getMaxItems(service.tut.pori.apilta.sensors.datatypes.Definitions.ELEMENT_WHEN);
-		if(count < 1){
-			LOGGER.warn("count < 1");
-			return null;
-		}else if(count >= Limits.DEFAULT_MAX_ITEMS){
-			LOGGER.debug("Count was "+Limits.DEFAULT_MAX_ITEMS+", using 1.");
-			count = 1;
-		}
+	public List<Condition> createConditionList(){
 		List<Condition> list = new ArrayList<>();
-		for(int i=0;i<count;++i){
-			Condition condition = createCondition(limits);
+		for(int i=-1, count=_random.nextInt(MAX_CONDITIONS);i<count;++i){
+			Condition condition = createCondition();
 			if(condition != null){
 				list.add(condition);
 			}
@@ -372,21 +373,12 @@ public class SensorsXMLObjectCreator {
 	
 	/**
 	 * 
-	 * @param limits 
 	 * @return return randomized condition
 	 */
-	public Condition createCondition(Limits limits){
-		int count = limits.getMaxItems(service.tut.pori.apilta.sensors.datatypes.Definitions.ELEMENT_CONDITION);
-		if(count < 1){
-			LOGGER.warn("count < 1");
-			return null;
-		}else if(count >= Limits.DEFAULT_MAX_ITEMS){
-			LOGGER.debug("Count was "+Limits.DEFAULT_MAX_ITEMS+", using 1.");
-			count = 1;
-		}
+	public Condition createCondition(){
 		Condition condition = new Condition();
 		TreeMap<String, String> conditions = new TreeMap<>();
-		for(int i=0; i<_random.nextInt(2)+1; ++i){
+		for(int i=-1, count=_random.nextInt(MAX_CONDITIONS); i<count; ++i){
 			conditions.put(_stringGenerator.generate(5), _stringGenerator.generate(10));
 		}
 		conditions.put("time/validFromToRange", Instant.now().minusSeconds(Math.abs(_random.nextLong() % 31536000L)).toString() +"/"+Instant.now().plusSeconds(Math.abs(_random.nextLong() % 31536000L)).toString());

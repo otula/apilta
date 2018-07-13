@@ -15,6 +15,7 @@
  */
 package core.tut.pori.http.parameters;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -218,6 +219,11 @@ public final class SortOptions extends HTTPParameter{
 	@Override
 	public Set<Option> getValue() {
 		return getDefaultSortOptions();
+	}
+	
+	@Override
+	public void initialize(InputStream parameterValue) throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("The use of HTTP Body is not implemented for this parameter.");
 	}
 	
 	/**

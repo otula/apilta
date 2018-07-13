@@ -17,10 +17,13 @@ package service.tut.pori.apilta.sensors.reference;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import service.tut.pori.apilta.sensors.datatypes.Measurement;
@@ -66,16 +69,15 @@ public final class SensorsReferenceCore {
 	 * 
 	 * @param authenticatedUser 
 	 * @param backendId if null, value is automatically generated
-	 * @param dataGroups
-	 * @param limits
+	 * @param taskIds optional ids, one random id will be generated if none is given
 	 * @param taskType
 	 * @return task details for a submitted task
 	 */
-	public static SensorTask generateTaskDetails(UserIdentity authenticatedUser, Long backendId, DataGroups dataGroups, Limits limits, String taskType) {
+	public static SensorTask generateTaskDetails(UserIdentity authenticatedUser, Long backendId, Collection<String> taskIds, String taskType) {
 		if(UserIdentity.isValid(authenticatedUser)){
 			LOGGER.debug("Authenticated user, id: "+authenticatedUser.getUserId()); // simply log the user id for debug
 		}
-		return CREATOR.generateTaskDetails((backendId == null ? Math.abs(CREATOR.getRandom().nextLong()) : backendId), dataGroups, limits, taskType);
+		return CREATOR.generateTaskDetails((backendId == null ? Math.abs(CREATOR.getRandom().nextLong()) : backendId), taskIds, taskType);
 	}
 	
 	/**
@@ -83,14 +85,15 @@ public final class SensorsReferenceCore {
 	 * @param authenticatedUser 
 	 * @param dataGroups
 	 * @param limits
+	 * @param taskId 
 	 * @param taskType
 	 * @return task details for a finished task
 	 */
-	public static SensorTask generateTaskResults(UserIdentity authenticatedUser, DataGroups dataGroups, Limits limits, String taskType) {
+	public static SensorTask generateTaskResults(UserIdentity authenticatedUser, DataGroups dataGroups, Limits limits, String taskId, String taskType) {
 		if(UserIdentity.isValid(authenticatedUser)){
 			LOGGER.debug("Authenticated user, id: "+authenticatedUser.getUserId()); // simply log the user id for debug
 		}
-		return CREATOR.generateTaskResults(null, dataGroups, limits, taskType);
+		return CREATOR.generateTaskResults(null, dataGroups, limits, (StringUtils.isBlank(taskId) ? null : Arrays.asList(taskId)), taskType);
 	}
 
 	/**
@@ -205,6 +208,7 @@ public final class SensorsReferenceCore {
 	 * @return randomly generated guid for the file
 	 * @throws IllegalArgumentException on bad data
 	 */
+	@SuppressWarnings("unused")
 	public static String createFile(UserIdentity authenticatedUser, Long backendId, InputStream file) throws IllegalArgumentException {
 		try {
 			byte[] buffer = new byte[BUFFER_SIZE];
@@ -229,11 +233,16 @@ public final class SensorsReferenceCore {
 	 * @param dataGroups 
 	 * @param limits
 	 * @param measurementIdFilter
+	 * @param taskIds 
 	 * @return randomly generated measurement id list
 	 */
-	public static MeasurementList getMeasurements(UserIdentity authenticatedUser, long[] backendIdFilter, Set<Interval> createdFilter, DataGroups dataGroups, Limits limits, List<String> measurementIdFilter) {
+	public static MeasurementList getMeasurements(UserIdentity authenticatedUser, long[] backendIdFilter, Set<Interval> createdFilter, DataGroups dataGroups, Limits limits, List<String> measurementIdFilter, Collection<String> taskIds) {
 		if(UserIdentity.isValid(authenticatedUser)){
 			LOGGER.debug("Authenticated user, id: "+authenticatedUser.getUserId()); // simply log the user id for debug
+		}
+		
+		if(taskIds != null && !taskIds.isEmpty()) {
+			LOGGER.debug("Ignored task identifiers.");
 		}
 		
 		List<Measurement> measurements = CREATOR.generateMeasurementList(backendIdFilter, createdFilter, dataGroups, limits, measurementIdFilter);
@@ -244,5 +253,23 @@ public final class SensorsReferenceCore {
 		MeasurementList list = new MeasurementList();
 		list.setMeasurements(measurements);
 		return list;
+	}
+
+	/**
+	 * 
+	 * @param authenticatedUser
+	 * @param backendId
+	 * @param dataGroups
+	 * @param limits
+	 * @param taskIds
+	 * @param taskType
+	 * @return pseudo-randomly generated task
+	 */
+	@SuppressWarnings("unused")
+	public static SensorTask queryTaskDetails(UserIdentity authenticatedUser, Long backendId, DataGroups dataGroups, Limits limits, List<String> taskIds, String taskType) {
+		if(!DataGroups.isEmpty(dataGroups)) {
+			LOGGER.debug("Ignored data groups.");
+		}
+		return generateTaskDetails(authenticatedUser, backendId, taskIds, taskType);
 	}
 }

@@ -216,6 +216,7 @@ public abstract class Task extends ResponseData {
 	 * 
 	 * @param uri
 	 */
+	@SuppressWarnings("unused")
 	protected void setCallbackUri(String uri){
 		//this does nothing
 	}

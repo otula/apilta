@@ -105,9 +105,7 @@ public abstract class HTTPParameter {
 	 * @param parameterValue can be null
 	 * @throws IllegalArgumentException on bad input data
 	 */
-	public void initialize(InputStream parameterValue) throws IllegalArgumentException{
-		throw new UnsupportedOperationException("The use of HTTP Body is not implemented for this parameter.");
-	}
+	public abstract void initialize(InputStream parameterValue) throws IllegalArgumentException;
 
 	/**
 	 * 
