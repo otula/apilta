@@ -17,10 +17,14 @@ package core.tut.pori.dao;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import core.tut.pori.dao.SQLSelectBuilder.OrderDirection;
 import core.tut.pori.dao.clause.SQLClause;
 import core.tut.pori.dao.clause.SQLClause.SQLType;
 import core.tut.pori.dao.clause.UpdateClause;
@@ -34,6 +38,7 @@ import core.tut.pori.http.parameters.Limits;
  */
 public class SQLUpdateBuilder {
 	private Limits _limits = null;
+	private LinkedHashMap<String, OrderDirection> _orderBy = null;
 	private String _tableName = null;
 	private ArrayList<UpdateClause> _updateClauses = new ArrayList<>();
 	private ArrayList<WhereClause> _whereClauses = null;
@@ -60,17 +65,6 @@ public class SQLUpdateBuilder {
 	public int getWhereClauseCount() {
 		return (_whereClauses == null ? 0 : _whereClauses.size());
 	}
-	
-	/**
-	 * @param startItem the startItem to set, negative value disables limit
-	 */
-	public void setStartItem(int startItem) {
-		if(_limits == null){
-			_limits = new Limits(startItem, Limits.DEFAULT_MAX_ITEMS);
-		}else{
-			_limits.setTypeLimits(startItem, _limits.getEndItem(), null);
-		}
-	}
 
 	/**
 	 * @param maxItems the maxItems to set, negative value disables limit
@@ -84,8 +78,9 @@ public class SQLUpdateBuilder {
 	}
 	
 	/**
+	 * Note that limit offset is not allowed, and providing startItem != 0 will cause exception to be thrown when SQL script is generated (in {@link #toSQLString()} or {@link #toSQLString(String)})
 	 * 
-	 * @param limits if null, this is a no-op
+	 * @param limits if null, this will clear the previously set limits (if any)
 	 */
 	public void setLimits(Limits limits){
 		_limits = limits;
@@ -115,6 +110,22 @@ public class SQLUpdateBuilder {
 	 */
 	public void clearUpdateClauses(){
 		_updateClauses.clear();
+	}
+	
+	/**
+	 * 
+	 * @param column
+	 * @param direction
+	 * @throws IllegalArgumentException on empty or blank column name
+	 */
+	public void addOrderBy(String column, OrderDirection direction) throws IllegalArgumentException{
+		if(StringUtils.isBlank(column)) {
+			throw new IllegalArgumentException("Invalid column name: "+column);
+		}
+		if(_orderBy == null){
+			_orderBy = new LinkedHashMap<>();
+		}
+		_orderBy.put(column,direction);
 	}
 	
 	/**
@@ -251,12 +262,25 @@ public class SQLUpdateBuilder {
 			}
 		}
 		
+		/* create order by */
+		if(_orderBy != null){
+			sql.append(" ORDER BY ");
+			for(Entry<String, OrderDirection> e : _orderBy.entrySet()){
+				sql.append(e.getKey());
+				sql.append(e.getValue().toOrderDirectionString());
+				sql.append(',');
+			}
+			sql.setLength(sql.length()-1);  // chop the tailing ,
+		}
+		
 		/* create limit */
 		if(_limits != null){
+			int startItem = _limits.getStartItem(type);
+			if(startItem != 0) {
+				throw new UnsupportedOperationException("Limit offset not supported for DELETE: startItem was != 0");
+			}
 			sql.append(" LIMIT ");
-			sql.append(_limits.getStartItem(type));
-			sql.append(',');
-			sql.append(_limits.getMaxItems());
+			sql.append(_limits.getMaxItems(type));
 		}
 		
 		return sql.toString();

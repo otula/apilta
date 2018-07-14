@@ -146,7 +146,7 @@ public class SQLSelectBuilder {
 	
 	/**
 	 * 
-	 * @param limits if null, this is a no-op
+	 * @param limits if null, this will clear the previously set limits (if any)
 	 */
 	public void setLimits(Limits limits){
 		_limits = limits;
@@ -337,7 +337,7 @@ public class SQLSelectBuilder {
 			sql.append(" LIMIT ");
 			sql.append(_limits.getStartItem(type));
 			sql.append(',');
-			sql.append(_limits.getMaxItems());
+			sql.append(_limits.getMaxItems(type));
 		}
 		
 		return sql.toString();
