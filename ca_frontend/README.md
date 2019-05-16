@@ -1,3 +1,11 @@
+ca_frontend
+-----------
+
+- Core service platform
+- A fork of VisualLabel core (https://github.com/visuallabel/CAFrontEnd)
+
+### Instructions
+
 Rename the build.properties.orig to build.properties. Edit the file for
 appropriate modifications for your use case.
 
@@ -17,7 +25,7 @@ services.
 The path to the main build configuration property file must be given to Ant.
 For example, ant -propertyfile build.properties
 
-Javadoc
+### Javadoc
 To generate javadoc documentation you may use file options as a base. For example
 # javadoc @options -J-Dtut.pori.javadocer.rest_uri="http://example.org/CAFrontEnd/rest/"
 

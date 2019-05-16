@@ -14,7 +14,7 @@ AlertApplication
 
 apilta_service
 - Apilta Service end point (https://otula.github.io/projektit/apilta-api)
-- For compilation requires ca_frontend
+- Compilation requires ca_frontend (https://github.com/otula/apilta/tree/master/ca_frontend)
 
 
 backend_cmd
@@ -26,6 +26,8 @@ ca_frontend
 - Core service platform
 - A fork of VisualLabel core (https://github.com/visuallabel/CAFrontEnd)
 
+data
+- Anonymized shock measurement data collected around the cities of Pori, Rauma and Tampere.
 
 DigitrafficBackend, ParkingBackend, SampoBackend, TrafficDemo1 and backend_web
 - Example back ends for accessing data by utilizing DigiTraffic, Pori parking data and Sampo satellite images and visualizing the data on map (TrafficDemo1)

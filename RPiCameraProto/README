@@ -1,1 +1,0 @@
-Modify camera.py to reflect the correct DATABASE_FILE path (for sqlite results), PHOTO_DIRECTORY (location for caputred photos), TARGETS_FILE (list of targets if database is not used)  and TASK_ID (if hardcoded task identifiers are used).

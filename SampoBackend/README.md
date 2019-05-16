@@ -1,7 +1,13 @@
+SampoBackend
+------------
+
 This is a test back end for retrieving images from the Finnish Meteorological Institute's SAMPO measurements (http://sampo.fmi.fi/). The images are free-to-use for non-commercial purposes.
 
 This example also demonstrates using and uploading images to the service.
 
+Service end-point is in apilta_service (SensorsService/ServerService, https://otula.github.io/projektit/apilta-api/service/tut/pori/apilta/sensors/reference/package-summary.html). This is based on the backend_web template (https://github.com/otula/apilta/tree/master/backend_web).
+
+### Instructions
 
 Rename the build.properties.orig to build.properties. Modify build.properties to match your installation details. All required .jar files
 are in the lib directory.
@@ -13,7 +19,8 @@ variables manually.
 
 Common IDE's may require the servlet-api.jar of your preferred Tomcat installation to be added to the build path manually.
 
-Deployment to server:
+### Server deployment
+
 - Any relatively new Apache Tomcat (tested on Tomcat 9, other servlet containers may also work) should work.
 - For tomcat, the administration user (in tomcat-user.xml) requires the permission: manager-script when deployment using Ant is used. 
 - Java 7+ is required (Oracle's or OpenJDK).
