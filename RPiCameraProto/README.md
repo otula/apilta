@@ -2,7 +2,7 @@ RPiCameraProto
 --------------
 
 - Application for automatically capturing photos when approaching designated targets using the Raspberry Pi platform
-- Can be utilized individually or in combination with backend_cmd
+- Can be utilized individually or in combination with backend_cmd (https://github.com/otula/apilta/tree/master/backend_cmd)
 - Example target and configuration files can be found in PeopleCounter/templates
 
 ### Instructions
